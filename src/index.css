@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-dark: #040914;
+    --bg-surface: #071124;
+    --accent-cyan: #00C2FF;
+    --accent-violet: #6366F1;
+  }
+
+  * {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  body {
+    background-color: #040914;
+    color: #F1F5F9;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #040914;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+@layer components {
+  /* Decent, subtle glassmorphism card */
+  .glass-panel {
+    background: rgba(8, 17, 34, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-panel-hover {
+    transition: all 0.2s ease-in-out;
+  }
+
+  .glass-panel-hover:hover {
+    background: rgba(11, 23, 48, 0.85);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  /* Decent buttons */
+  .btn-cyber-cyan {
+    background: #00C2FF;
+    color: #040914;
+    font-weight: 700;
+    transition: all 0.2s ease;
+  }
+
+  .btn-cyber-cyan:hover {
+    background: #33CEFF;
+  }
+
+  .btn-cyber-outline {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #F1F5F9;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .btn-cyber-outline:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .container-max {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
