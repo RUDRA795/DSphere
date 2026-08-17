@@ -116,7 +116,7 @@ export default function Footer({ onOpenRegister }) {
 
         <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-mono">
           <div>© 2026 DSphere · Department of CSE (Data Science), TGPCET Nagpur</div>
-          <div className="mt-2 sm:mt-0">21 — 22 August 2026</div>
+          <div className="mt-2 sm:mt-0">22 August 2026</div>
         </div>
       </div>
     </footer>

@@ -19,7 +19,7 @@ export const GENERAL_GUIDELINES = [
     title: 'Academic & Competitive Integrity',
     points: [
       'Plagiarism, unauthorized collaboration between competing teams, reverse engineering, or attempting to compromise campus network security will result in immediate disqualification.',
-      'Use of generative AI tools must strictly adhere to specific event rules (e.g., permitted in DataForge if declared, strictly barred in live debate rounds during speeches).',
+      'Use of generative AI tools must strictly adhere to specific event rules (e.g., permitted for ideation and reference, but final model/code must be created and customized by participants).',
       'The decisions of the designated panel of judges and faculty coordinators are final, binding, and not subject to appeal.'
     ]
   },
@@ -35,15 +35,16 @@ export const GENERAL_GUIDELINES = [
     title: 'Certificates & Prize Disbursement',
     points: [
       'Certificates of Participation will be issued digitally to all registered attendees who actively participate in their registered events.',
-      'Cash prizes and trophies will be awarded during the Grand Valedictory Ceremony on August 22, 2026.',
-      'For team events, the cash prize will be transferred directly via NEFT/UPI to the designated Team Lead bank account.'
+      'Exciting prizes, tech gadgets, reward vouchers, medals, and merit certificates will be awarded during the Grand Valedictory Ceremony on August 22, 2026.',
+      'For team events, prize hampers, vouchers, medals, and certificates of excellence will be presented directly to winning team members.'
     ]
   }
 ]
 
 export const DISQUALIFICATION_POLICY = [
   'Providing falsified student credentials or impersonating another student.',
-  'Unauthorized tampering with lab computers, networks, or game servers.',
+  'Unauthorized tampering with lab computers, networks, or campus systems.',
   'Harassment, abusive language, or unsportsmanlike conduct in person or in virtual channels.',
+  'Direct submission of pre-existing, downloaded, or copied code/3D models.',
   'Sharing confidential problem statements or test datasets before public release.'
 ]

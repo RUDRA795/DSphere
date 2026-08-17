@@ -45,7 +45,7 @@ export default function RegistrationModal({ isOpen, onClose, preselectedSlug = '
           <label className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block mb-2">
             Select Track:
           </label>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {EVENTS.map((ev) => {
               const isSelected = ev.slug === selectedSlug
               return (

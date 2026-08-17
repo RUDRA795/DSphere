@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Trophy, MapPin, Calendar } from 'lucide-react'
+import { ArrowRight, Award, MapPin, Calendar } from 'lucide-react'
 import CountdownTimer from './CountdownTimer'
 
 export default function Hero({ onOpenRegister }) {
@@ -10,7 +10,7 @@ export default function Hero({ onOpenRegister }) {
         {/* Date & Dept Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-slate-300">
           <Calendar size={13} className="text-[#00C2FF]" />
-          <span>21 — 22 AUGUST 2026</span>
+          <span>22 AUGUST 2026</span>
           <span className="text-slate-600">·</span>
           <span>TGPCET NAGPUR</span>
         </div>
@@ -28,15 +28,15 @@ export default function Hero({ onOpenRegister }) {
         {/* Fast Specs */}
         <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono text-slate-300 pt-1">
           <div className="glass-panel px-3.5 py-1.5 rounded-lg border border-white/10 flex items-center gap-2">
-            <Trophy size={14} className="text-amber-400" />
-            <span className="text-amber-300 font-bold">₹50,000+ Prize Pool</span>
+            <Award size={14} className="text-amber-400" />
+            <span className="text-amber-300 font-bold">Exciting Prizes & Rewards</span>
           </div>
           <div className="glass-panel px-3.5 py-1.5 rounded-lg border border-white/10 flex items-center gap-2">
             <MapPin size={14} className="text-[#00FF9D]" />
             <span>TGPCET Campus, Wardha Road</span>
           </div>
           <div className="glass-panel px-3.5 py-1.5 rounded-lg border border-white/10">
-            <span>4 Flagship Events</span>
+            <span>3 Flagship Events</span>
           </div>
         </div>
 
@@ -54,7 +54,7 @@ export default function Hero({ onOpenRegister }) {
             to="/events"
             className="btn-cyber-outline px-6 py-3 rounded-xl text-xs font-bold tracking-wide cursor-pointer"
           >
-            VIEW 4 EVENTS
+            VIEW 3 EVENTS
           </Link>
         </div>
 

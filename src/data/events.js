@@ -2,13 +2,12 @@ export const REGISTRATION_LINKS = {
   dataforge: "https://docs.google.com/forms/d/e/1FAIpQLSe-dataforge-2026/viewform",
   dataduals: "https://docs.google.com/forms/d/e/1FAIpQLSe-dataduals-2026/viewform",
   datamodelling: "https://docs.google.com/forms/d/e/1FAIpQLSe-datamodelling-2026/viewform",
-  dataarena: "https://docs.google.com/forms/d/e/1FAIpQLSe-dataarena-2026/viewform",
   general: "https://docs.google.com/forms/d/e/1FAIpQLSe-dsphere-all-events-2026/viewform"
 }
 
 export const FESTIVAL_STATS = [
-  { label: "Flagship Events", value: "04", suffix: "+", icon: "Layers" },
-  { label: "Total Prize Pool", value: "₹50,000", suffix: "+", icon: "Trophy" },
+  { label: "Flagship Events", value: "03", suffix: "", icon: "Layers" },
+  { label: "Prizes & Rewards", value: "Exciting", suffix: " Rewards", icon: "Award" },
   { label: "Expected Delegates", value: "500", suffix: "+", icon: "Users" },
   { label: "Colleges Represented", value: "40", suffix: "+", icon: "Building2" },
 ]
@@ -18,23 +17,30 @@ export const EVENTS = [
     slug: 'dataforge',
     name: 'DataForge',
     tagline: 'Forge Ideas. Train Models. Solve Problems.',
-    category: 'Machine Learning / AI',
+    category: 'Machine Learning / AI Hackathon',
     iconName: 'Cpu',
-    date: '21 August 2026',
-    day: 'Day 1',
-    time: '09:30 AM — 04:30 PM',
+    date: '22 August 2026',
+    day: '22 Aug 2026',
+    time: '11:00 AM — 04:45 PM',
     venue: 'Advanced AI & Data Science Computing Lab, TGPCET',
     themeColor: '#00F0FF',
     accentGradient: 'from-cyan-500 to-blue-600',
-    shortDesc: 'A flagship machine learning hackathon where participants build predictive models and end-to-end data pipelines for real-world industry problems.',
-    description: 'DataForge is the premier machine learning and artificial intelligence challenge of DSphere 2026. Teams will be provided with curated raw datasets and domain problem statements at the start of the event. Over a high-intensity 7-hour sprint, participants must cleanse data, engineer features, evaluate multiple model architectures, optimize hyper-parameters, and deploy an interactive inference prototype.',
+    shortDesc: 'A premier machine learning hackathon where participants build predictive models and end-to-end data pipelines for real-world industry problems.',
+    description: 'DataForge is the premier machine learning and artificial intelligence challenge of DSphere 2026. Participants (individuals or teams) will build an end-to-end Machine Learning model to solve a given or chosen problem statement, working through data cleaning, EDA, feature engineering, model training, and hyperparameter optimization to maximize Accuracy and F1-Score while documenting their dataset and approach.',
     teamSize: '1 — 3 Members',
     entryFee: '₹150 / Team',
-    prizePool: '₹18,000 Total Prize Pool',
+    prizePool: 'Exciting Prizes & Rewards',
     prizes: [
-      { position: '1st Place (Champion)', reward: '₹10,000 + Trophy + Certificate of Excellence' },
-      { position: '2nd Place (Runner Up)', reward: '₹5,000 + Trophy + Certificate of Excellence' },
-      { position: 'Best Innovation / SOTA Model', reward: '₹3,000 + Special Certificate' },
+      { position: '1st Place (Champion)', reward: 'Gold Medals + Premium Tech Gadgets + Reward Vouchers + Certificate of Excellence' },
+      { position: '2nd Place (Runner Up)', reward: 'Silver Medals + Exclusive Rewards Hampers + Vouchers + Certificate of Excellence' },
+      { position: 'Best Innovation / SOTA Model', reward: 'Special Recognition Kit + Reward Vouchers + Certificate of Merit' },
+    ],
+    objectives: [
+      'Identify a real-world problem and a suitable dataset.',
+      'Perform data cleaning, preprocessing, and Exploratory Data Analysis (EDA).',
+      'Build, train, and optimize an ML model.',
+      'Improve model performance (Accuracy, F1-Score, and other relevant metrics).',
+      'Present results with clear reasoning and real-world relevance.'
     ],
     tracks: [
       { title: 'Predictive Health & Bio-Informatics', desc: 'Classification and risk assessment using clinical dataset attributes.' },
@@ -43,19 +49,26 @@ export const EVENTS = [
       { title: 'Fintech & Fraud Detection', desc: 'Anomaly detection on high-throughput transactional records.' }
     ],
     evaluationRubric: [
-      { criteria: 'Model Accuracy & Quantitative Metrics (F1 / ROC-AUC / RMSE)', weight: '35%' },
-      { criteria: 'Feature Engineering & Data Pipeline Integrity', weight: '25%' },
-      { criteria: 'Innovation, Novelty & Architecture Selection', weight: '20%' },
+      { criteria: 'Model Accuracy, F1-Score & Quantitative Benchmarks', weight: '35%' },
+      { criteria: 'Data Cleaning, EDA & Pipeline Integrity', weight: '25%' },
+      { criteria: 'Innovation, Architecture Selection & Optimization', weight: '20%' },
       { criteria: 'Final Pitch, Demo UI & Live Inference Presentation', weight: '20%' }
     ],
     rules: [
-      'Teams must consist of 1 to 3 members currently enrolled in an accredited undergraduate or diploma program.',
-      'Datasets and evaluation benchmarks will be released on the morning of August 21, 2026 at 09:30 AM.',
-      'Participants must bring their own laptops. High-speed campus Wi-Fi and power outlets will be provided.',
-      'Usage of open-source libraries (PyTorch, TensorFlow, Scikit-Learn, HuggingFace, XGBoost) is permitted.',
-      'Pre-trained foundation weights are allowed only if declared explicitly during the pitch and documented in GitHub.',
-      'Plagiarism or sharing code between competing teams will lead to instant disqualification.',
-      'Final code repository with reproducible Jupyter notebook must be submitted before the deadline.'
+      'Overview: Participants (individuals or teams) will build a Machine Learning model to solve a given or chosen problem statement, working through data preprocessing, model building, and optimization to maximize Accuracy and F1-Score, while clearly documenting their dataset and approach.',
+      'Team Guidelines: Team size is 1 to 3 members. Each team must register with a team name and problem statement/domain. Cross-team code sharing is not allowed; plagiarism leads to immediate disqualification.',
+      'Dataset Rules: Teams may use a public dataset (Kaggle, UCI ML Repository, government open data, etc.) or a provided dataset (if the hackathon supplies one). Dataset source/link must be disclosed in the final submission. Custom/scraped datasets are allowed but must include a data collection description. Data leakage (using test data in training) is strictly prohibited.',
+      'Technical Guidelines: Any language/framework allowed: Python (Scikit-learn, TensorFlow, PyTorch, XGBoost, etc.), R, etc. Maintain a clean, commented notebook or script.',
+      'Pretrained Models: Use of pretrained models/transfer learning is allowed unless stated otherwise — must be explicitly disclosed in the submission and pitch. Code must be reproducible (shared via GitHub/Colab notebook).',
+      'Submission Requirements: Final submission must include Problem statement document, Dataset link or file, EDA notebook/report, Model training code, Final metrics report (Accuracy, F1-Score, Confusion Matrix), and PPT/report explaining approach.'
+    ],
+    submissionChecklist: [
+      'Problem statement document',
+      'Dataset with source link or file',
+      'EDA notebook / report',
+      'Model training code',
+      'Final metrics report (Accuracy, F1-Score, Confusion Matrix)',
+      'PPT / report explaining approach'
     ],
     coordinators: [
       { name: 'Prof. Aniket Sharma', role: 'Faculty Coordinator', phone: '+91 98230 45678', email: 'aniket.sharma@tgpcet.com' },
@@ -63,7 +76,7 @@ export const EVENTS = [
       { name: 'Riya Kulkarni', role: 'Technical Sub-Lead', phone: '+91 91234 56780', email: 'riya.ds26@tgpcet.com' }
     ],
     faqs: [
-      { q: 'Can beginner data science students participate?', a: 'Yes! We provide structured baseline templates and mentor support to guide you through data preprocessing.' },
+      { q: 'Can beginner data science students participate?', a: 'Yes! We provide structured baseline templates and mentor support to guide you through data preprocessing and baseline models.' },
       { q: 'Will cloud compute / GPU credits be provided?', a: 'Participants can use Google Colab or Kaggle GPU environments; local execution on laptops is also standard.' },
       { q: 'Do all team members need to be from the same college?', a: 'Inter-college teams are welcome, provided all members hold valid student IDs.' }
     ],
@@ -75,9 +88,9 @@ export const EVENTS = [
     tagline: 'Two Sides. One Topic. Unlimited Arguments.',
     category: 'Technology Debate & Critical Thinking',
     iconName: 'MessageSquare',
-    date: '21 August 2026',
-    day: 'Day 1',
-    time: '11:00 AM — 03:30 PM',
+    date: '22 August 2026',
+    day: '22 Aug 2026',
+    time: '11:00 AM — 03:00 PM',
     venue: 'Central Seminar Hall 1, TGPCET',
     themeColor: '#8B5CF6',
     accentGradient: 'from-violet-500 to-purple-600',
@@ -85,11 +98,11 @@ export const EVENTS = [
     description: 'DataDuals is the ultimate verbal battleground for tech enthusiasts, policy thinkers, and critical analysts. In an era where AI is rewriting industry norms, DataDuals challenges speakers to argue the affirmative and negative of provocative technological propositions before a panel of esteemed jury members.',
     teamSize: '2 Members (Speaker 1 + Speaker 2)',
     entryFee: '₹100 / Team',
-    prizePool: '₹10,000 Total Prize Pool',
+    prizePool: 'Exciting Prizes & Rewards',
     prizes: [
-      { position: '1st Place (Winning Duo)', reward: '₹6,000 + Trophy + Certificate of Excellence' },
-      { position: '2nd Place (Runners Up)', reward: '₹3,000 + Trophy + Certificate of Excellence' },
-      { position: 'Best Orator Award (Individual)', reward: '₹1,000 + Memento + Certificate' },
+      { position: '1st Place (Winning Duo)', reward: 'Gold Medals + Tech Hampers + Reward Vouchers + Certificate of Excellence' },
+      { position: '2nd Place (Runners Up)', reward: 'Silver Medals + Exclusive Reward Vouchers + Certificate of Excellence' },
+      { position: 'Best Orator Award (Individual)', reward: 'Best Orator Medal + Reward Voucher + Certificate of Merit' },
     ],
     tracks: [
       { title: 'AGI & Existential AI Risk', desc: 'Is autonomous superintelligence an existential threat or the greatest catalyst for human flourishing?' },
@@ -125,40 +138,97 @@ export const EVENTS = [
     slug: 'datamodelling',
     name: 'DataModelling',
     tagline: 'Imagine It. Model It. Build It.',
-    category: 'CAD / 3D Digital Twin / Engineering',
+    category: '3D Modelling Competition',
     iconName: 'Box',
     date: '22 August 2026',
-    day: 'Day 2',
-    time: '10:00 AM — 02:30 PM',
+    day: '22 Aug 2026',
+    time: '11:00 AM — 03:30 PM',
     venue: 'Digital Design & CAD Centre, Mechanical Block, TGPCET',
     themeColor: '#00FF9D',
     accentGradient: 'from-emerald-400 to-teal-600',
-    shortDesc: 'A flagship 3D CAD and digital twin design competition testing precision parametric modeling, generative mechanical assemblies, and photorealistic rendering.',
-    description: 'DataModelling merges engineering rigor with artistic digital fabrication. Participants receive technical orthographic blueprints and functional design briefs to model complex assemblies, simulate kinematic motion, and produce photorealistic renders using industry-standard engineering suites.',
+    shortDesc: 'A flagship 3D modelling and CAD engineering competition testing precision modeling, assembly creation, and photorealistic rendering.',
+    description: 'DataModelling is open to students from all engineering branches. Participants create an original 3D model based on the given theme or problem statement using industry-standard engineering, architectural, or creative 3D design suites. Participants demonstrate their design rationale, modelling approach, and engineering concepts live before the judges.',
     teamSize: '1 — 2 Members',
     entryFee: '₹120 / Team',
-    prizePool: '₹12,000 Total Prize Pool',
+    prizePool: 'Exciting Prizes & Rewards',
     prizes: [
-      { position: '1st Place (Design Champion)', reward: '₹7,000 + Trophy + Certificate of Excellence' },
-      { position: '2nd Place (Design Runner Up)', reward: '₹3,500 + Trophy + Certificate of Excellence' },
-      { position: 'Best Ergonomic & Photorealistic Render', reward: '₹1,500 + Memento' },
+      { position: '1st Place (Design Champion)', reward: 'Gold Medal + Premium Tech Gadgets + Reward Vouchers + Certificate of Excellence' },
+      { position: '2nd Place (Design Runner Up)', reward: 'Silver Medal + Exclusive Rewards Hampers + Vouchers + Certificate of Excellence' },
+      { position: 'Best Ergonomic & Photorealistic Render', reward: 'Special Design Medal + Reward Voucher + Certificate of Merit' },
     ],
+    supportedSoftware: [
+      {
+        domain: '⚙️ CAD & Engineering Design',
+        tools: ['Autodesk Fusion 360', 'SolidWorks', 'CATIA', 'Autodesk Inventor', 'Creo']
+      },
+      {
+        domain: '🏗️ Architecture & Civil',
+        tools: ['AutoCAD', 'Autodesk Revit', 'Civil 3D', 'SketchUp', 'ArchiCAD']
+      },
+      {
+        domain: '⚡ Electrical & Electronics',
+        tools: ['AutoCAD Electrical', 'EPLAN', 'SolidWorks Electrical', 'KiCad', 'EasyEDA', 'Proteus']
+      },
+      {
+        domain: '🎨 3D Visualization & Creative Modelling',
+        tools: ['Blender', 'SketchUp', 'Unity', 'Tinkercad']
+      },
+      {
+        domain: '✈️ Aerospace / Advanced Modelling',
+        tools: ['CATIA', 'Siemens NX', 'SolidWorks', 'Fusion 360', 'OpenVSP']
+      }
+    ],
+    submissionRequirements: [
+      {
+        title: '1. Final 3D Model',
+        desc: 'The completed model/project created during the competition.'
+      },
+      {
+        title: '2. Source File',
+        desc: 'The original editable project file of the software used.'
+      },
+      {
+        title: '3. Rendered Output',
+        desc: 'At least 2–3 clear views of the final model.'
+      },
+      {
+        title: '4. Project Description',
+        desc: 'A brief explanation covering: Problem/Theme, Proposed solution, Software used, Key features, and Engineering application.'
+      },
+      {
+        title: '5. Live Demonstration',
+        desc: 'Participants should be prepared to open and demonstrate their model if requested by the judges.'
+      }
+    ],
+    importantNote: 'The model should be created during the competition period unless the organizers specifically permit pre-built components or templates. Participants should have preinstalled software on their own laptops, be prepared to explain their modelling process, and demonstrate ownership of their work.',
     tracks: [
-      { title: 'Generative Automotive & Aerodynamic Shells', desc: 'Lightweight aerospace or EV chassis components modeled for optimized drag coefficient.' },
-      { title: 'Industrial Robotics & Kinematic Grippers', desc: 'Multi-axis robotic arm linkages with kinematic joint constraints.' },
-      { title: 'Digital Twin & Smart Architecture', desc: 'IoT sensor housing and modular sustainable hardware enclosures.' }
+      { title: 'Generative Mechanical & Automotive Shells', desc: 'Lightweight aerospace, EV chassis components, and mechanical assemblies.' },
+      { title: 'Industrial Robotics & Kinematic Mechanisms', desc: 'Multi-axis robotic linkages with kinematic constraints.' },
+      { title: 'Digital Twin & Smart Sustainable Architecture', desc: 'Architectural blueprints, IoT sensor housings, and modular hardware enclosures.' }
     ],
     evaluationRubric: [
-      { criteria: 'Geometric Dimensional Accuracy & Parametric Constraint Tree', weight: '40%' },
-      { criteria: 'Assembly Kinematics, Tolerance Fit & Exploded View', weight: '25%' },
-      { criteria: 'Render Lighting, Material Texturing & Aesthetic Presentation', weight: '20%' },
-      { criteria: 'Speed of Completion & Clean Geometry', weight: '15%' }
+      { criteria: 'Geometric Dimensional Accuracy & Parametric Quality', weight: '35%' },
+      { criteria: 'Creativity, Technical Understanding & Practical Applicability', weight: '25%' },
+      { criteria: 'Render Quality, Material Texturing & Aesthetic Presentation', weight: '20%' },
+      { criteria: 'Live Demonstration & Design Explanation to Judges', weight: '20%' }
     ],
     rules: [
-      'Permitted Software: SolidWorks, CATIA V5/3DEXPERIENCE, Autodesk Inventor, Fusion 360, AutoCAD, Blender, or MATLAB Simulink.',
-      'All 3D models must be built from a clean origin within the designated competition time limit (3.5 hours).',
-      'Using pre-downloaded 3D model assets (GrabCAD, Thingiverse, TurboSquid) is strictly forbidden.',
-      'Participants must submit the native CAD parametric file (.SLDPRT, .CATPart, .f3d, .blend) along with a .STEP exchange file and two high-res PNG renders.'
+      'The competition is open to students from all engineering branches.',
+      'Participants may participate individually or in teams (1 — 2 Members) as specified by the organizers.',
+      'Participants must create an original 3D model based on the given theme/problem statement.',
+      'The model must be created using one of the supported software/tools (Autodesk Fusion 360, SolidWorks, CATIA, AutoCAD, Revit, Blender, Creo, etc.).',
+      'Participants are allowed to use reference images, tutorials, documentation, and publicly available resources for learning.',
+      'Direct submission of downloaded or pre-existing 3D models is strictly prohibited.',
+      'AI-assisted tools may be used for ideation and reference, but the final 3D model must be created and customized by the participant.',
+      'Participants should be able to explain their design, modelling approach, and engineering concept to the judges.',
+      'Models should demonstrate creativity, technical understanding, accuracy, and practical applicability.',
+      'Participants must submit their model/project within the time limit specified by the organizers.',
+      'Participants should keep their project files saved regularly to avoid loss of work.',
+      'The final submission must contain the editable/source project file along with required rendered images/screenshots.',
+      'Participants may be asked to demonstrate their model live during evaluation.',
+      'Any form of plagiarism, copied designs, or misrepresentation of work may lead to disqualification.',
+      'Judges\' decisions regarding evaluation and final rankings will be final and binding.',
+      'Organizers reserve the right to modify rules, themes, or submission requirements if necessary.'
     ],
     coordinators: [
       { name: 'Prof. Manish Chawla', role: 'Faculty Coordinator', phone: '+91 97654 32190', email: 'manish.cad@tgpcet.com' },
@@ -166,59 +236,10 @@ export const EVENTS = [
       { name: 'Tanvi Raut', role: 'Student Coordinator', phone: '+91 88776 65544', email: 'tanvi.ds26@tgpcet.com' }
     ],
     faqs: [
-      { q: 'Can I bring my own workstation or laptop?', a: 'Yes! You are encouraged to use your personal laptop with your preferred CAD software, or use lab systems.' },
+      { q: 'Can I use other professional CAD/3D software not in the list?', a: 'Yes, participants may use another professional 3D modelling/CAD tool if suitable and approved by organizers.' },
+      { q: 'Can I bring my own laptop?', a: 'Yes! Participants should have preinstalled software on their own laptops.' },
       { q: 'Is 3D printing available for winning designs?', a: 'Yes, top-ranking designs may be selected for sample 3D printing in the TGPCET Innovation Lab!' }
     ],
     registration: REGISTRATION_LINKS.datamodelling
-  },
-  {
-    slug: 'dataarena',
-    name: 'DataArena',
-    tagline: 'Enter the Arena. Play to Dominate.',
-    category: 'Esports Championship',
-    iconName: 'Gamepad2',
-    date: '22 August 2026',
-    day: 'Day 2',
-    time: '11:30 AM — 05:30 PM',
-    venue: 'Auditorium Main Stage & Esports Arena, TGPCET',
-    themeColor: '#F43F5E',
-    accentGradient: 'from-rose-500 to-amber-500',
-    shortDesc: 'A pulse-pounding collegiate esports tournament featuring battle royale and tactical shooter showdowns with live stage casting and bracket elimination.',
-    description: 'DataArena is where tactical coordination, split-second reflexes, and esports mastery take center stage. Featuring premier competitive titles (BGMI Squad Battles & Valorant / FIFA 1v1 Brackets), top college squads will fight through group stages, semi-final clashes, and a high-stakes Grand Final broadcasted live on campus LED screens.',
-    teamSize: 'Squad: 4 Players (+1 Sub) | Solo: 1 Player',
-    entryFee: '₹200 / Squad | ₹80 / Solo',
-    prizePool: '₹15,000 Total Prize Pool',
-    prizes: [
-      { position: '1st Place (Squad Champions)', reward: '₹8,000 + Championship Trophy + Medals' },
-      { position: '2nd Place (Squad Runners Up)', reward: '₹4,500 + Trophy + Medals' },
-      { position: 'MVP of the Tournament (Highest Frags)', reward: '₹2,500 + Gaming Gear + Memento' },
-    ],
-    tracks: [
-      { title: 'BGMI Mobile Squad Championship', desc: 'Erangel & Miramar tactical battle royale lobby matches with official points table.' },
-      { title: 'Valorant 5v5 Tactical Clashes', desc: 'Competitive plant/defuse bracket tournament on high-performance LAN rigs.' },
-      { title: 'FIFA / EA FC 26 Solo Knockout', desc: '1v1 tournament with single-elimination rounds on PS5 controllers.' }
-    ],
-    evaluationRubric: [
-      { criteria: 'Placement Points & Survival Bracket Standing', weight: '50%' },
-      { criteria: 'Total Kill / Frag Points', weight: '40%' },
-      { criteria: 'Sportsmanship & Match Fairplay Conduct', weight: '10%' }
-    ],
-    rules: [
-      'All players must have registered game IDs and valid college identification cards.',
-      'Use of emulators, third-party APKs, aimbot, trigger accessories, or wall hacks will lead to immediate ban and forfeit of fees.',
-      'Custom room ID and passwords will be shared on the official DSphere Discord and WhatsApp tournament broadcast 15 minutes prior to match.',
-      'All players must maintain stable 4G/5G or use designated campus high-speed gaming Wi-Fi; disconnects mid-game cannot be restarted unless server-side.',
-      'Referees decisions in dispute matches are final and binding.'
-    ],
-    coordinators: [
-      { name: 'Prof. Rahul Meshram', role: 'Faculty Coordinator', phone: '+91 98900 11223', email: 'rahul.esports@tgpcet.com' },
-      { name: 'Harshwardhan Patil', role: 'Esports Lead', phone: '+91 80077 12345', email: 'harsh.arena@tgpcet.com' },
-      { name: 'Sameer Sheikh', role: 'Tournament Admin', phone: '+91 93250 99887', email: 'sameer.arena@tgpcet.com' }
-    ],
-    faqs: [
-      { q: 'Will matches be casted live?', a: 'Yes! The finals will be casted live in the TGPCET Auditorium with dynamic spectator feeds!' },
-      { q: 'Can non-TGPCET college teams participate?', a: 'Yes, DSphere esports is open to students from all registered universities and colleges.' }
-    ],
-    registration: REGISTRATION_LINKS.dataarena
   }
 ]

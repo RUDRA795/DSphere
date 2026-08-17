@@ -20,7 +20,7 @@ export default function EventCard({ event, onOpenRegister, index = 0 }) {
             {event.category}
           </span>
           <div className="px-2.5 py-0.5 rounded-md bg-amber-400/10 text-amber-300 text-xs font-mono font-semibold border border-amber-400/20">
-            {event.prizePool.split(' ')[0]}
+            {event.prizePool}
           </div>
         </div>
 

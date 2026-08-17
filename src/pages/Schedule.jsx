@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Clock, MapPin } from 'lucide-react'
+import { Clock, MapPin, Calendar, Sparkles } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SCHEDULE_DAYS } from '../data/schedule'
 
@@ -18,8 +18,24 @@ const itemVariants = {
 }
 
 export default function Schedule() {
-  const [activeDay, setActiveDay] = useState('day1')
-  const currentDayData = SCHEDULE_DAYS.find((d) => d.dayId === activeDay) || SCHEDULE_DAYS[0]
+  const [filter, setFilter] = useState('ALL')
+  const dayData = SCHEDULE_DAYS[0]
+
+  const filterOptions = [
+    { id: 'ALL', label: 'Full Schedule' },
+    { id: 'COMPETITIONS', label: 'Competitions' },
+    { id: 'CEREMONY', label: 'Inauguration & Valedictory' },
+  ]
+
+  const filteredTimeline = dayData.timeline.filter((item) => {
+    if (filter === 'COMPETITIONS') {
+      return item.eventSlug || item.tag === 'Live Competition' || item.tag === 'Pitching'
+    }
+    if (filter === 'CEREMONY') {
+      return item.tag === 'Ceremony' || item.tag === 'Valedictory' || item.tag === 'Onboarding'
+    }
+    return true
+  })
 
   return (
     <div className="pt-24 sm:pt-28 pb-16 container-max space-y-8">
@@ -28,54 +44,71 @@ export default function Schedule() {
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="border-b border-white/10 pb-4"
+        className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-4"
       >
-        <h1 className="font-display text-3xl sm:text-4xl font-bold text-white">
-          Event Schedule
-        </h1>
-        <p className="text-slate-400 text-xs sm:text-sm mt-1">
-          2-Day schedule for DSphere 2026 at TGPCET Nagpur campus.
-        </p>
+        <div>
+          <h1 className="font-display text-3xl sm:text-4xl font-bold text-white">
+            Event Schedule
+          </h1>
+          <p className="text-slate-400 text-xs sm:text-sm mt-1">
+            One-day synchronized schedule for DSphere 2026 at TGPCET Nagpur campus.
+          </p>
+        </div>
+
+        <div className="glass-panel px-3.5 py-1.5 rounded-lg border border-[#00C2FF]/30 text-xs font-mono text-[#00C2FF] flex items-center gap-2 self-start sm:self-auto">
+          <Calendar size={14} />
+          <span>Saturday, 22 August 2026</span>
+        </div>
       </motion.div>
 
-      {/* Day Selector */}
+      {/* Date Banner & Filters */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.05 }}
-        className="grid grid-cols-2 gap-3 max-w-md"
+        className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
       >
-        {SCHEDULE_DAYS.map((day) => {
-          const isSelected = activeDay === day.dayId
-          return (
-            <button
-              key={day.dayId}
-              onClick={() => setActiveDay(day.dayId)}
-              className={`p-4 rounded-xl text-left border transition-all cursor-pointer ${
-                isSelected
-                  ? 'border-[#00C2FF] bg-[#00C2FF]/10 text-white'
-                  : 'glass-panel text-slate-300 hover:border-white/20'
-              }`}
-            >
-              <div className="text-xs font-mono font-bold text-[#00C2FF]">{day.dayLabel}</div>
-              <div className="font-display font-bold text-sm sm:text-base mt-0.5">{day.date.split(',')[0]}</div>
-              <div className="text-[11px] text-slate-400 font-mono mt-1">{day.focus.split('&')[0]}</div>
-            </button>
-          )
-        })}
+        <div className="glass-panel p-4 rounded-xl border border-white/10 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-[#00C2FF]/10 border border-[#00C2FF]/20 flex items-center justify-center text-[#00C2FF]">
+            <Sparkles size={18} />
+          </div>
+          <div>
+            <div className="text-xs font-mono font-bold text-[#00C2FF]">ONE-DAY MEGA CONVERGENCE</div>
+            <div className="font-display font-bold text-sm sm:text-base text-white">22 August 2026 · 08:30 AM to 06:30 PM</div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-1.5">
+          {filterOptions.map((opt) => {
+            const isSelected = filter === opt.id
+            return (
+              <button
+                key={opt.id}
+                onClick={() => setFilter(opt.id)}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#00C2FF] text-[#040914] font-bold'
+                    : 'glass-panel text-slate-300 hover:text-white'
+                }`}
+              >
+                {opt.label}
+              </button>
+            )
+          })}
+        </div>
       </motion.div>
 
       {/* Timeline */}
       <AnimatePresence mode="wait">
         <motion.div
-          key={activeDay}
+          key={filter}
           variants={containerVariants}
           initial="hidden"
           animate="visible"
           exit="hidden"
           className="space-y-3"
         >
-          {currentDayData.timeline.map((item, index) => (
+          {filteredTimeline.map((item, index) => (
             <motion.div
               key={index}
               variants={itemVariants}

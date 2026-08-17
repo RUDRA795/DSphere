@@ -33,7 +33,7 @@ export const DEPARTMENT_INFO = {
     { name: "Prof. Abhimanyu Dutonde", role: "Convener & Head of Department", specialization: "Machine Learning & Big Data" },
     { name: "Prof. Pooja Pimpalshende", role: "Faculty Co-Convener (DataForge)", specialization: "Deep Learning & NLP" },
     { name: "Prof. Premlata Shahare", role: "Faculty In-Charge (DataDuals)", specialization: "Data Ethics & AI Governance" },
-    { name: "Prof. Jayesh Bisane", role: "Faculty In-Charge (DataArena)", specialization: "Network Systems & Gaming" }
+    { name: "Prof. Jayesh Bisane", role: "Faculty In-Charge (DataModelling)", specialization: "CAD Systems & Digital Engineering" }
   ],
   studentCoreCommittee: [
     { name: "Aditya Korde", role: "Forum President", year: "Final Year CSE-Data Science", contact: "+91 84469 05836" },

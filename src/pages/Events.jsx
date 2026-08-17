@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Search, Trophy } from 'lucide-react'
+import { Search, Award } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import EventCard from '../components/EventCard'
 import { EVENTS } from '../data/events'
@@ -21,7 +21,6 @@ export default function Events({ onOpenRegister }) {
     { id: 'ML', label: 'Machine Learning' },
     { id: 'DEBATE', label: 'Tech Debate' },
     { id: 'CAD', label: '3D CAD' },
-    { id: 'ESPORTS', label: 'Esports' },
   ]
 
   const filteredEvents = EVENTS.filter((ev) => {
@@ -35,7 +34,6 @@ export default function Events({ onOpenRegister }) {
     if (selectedCategory === 'ML') matchesCategory = ev.slug === 'dataforge'
     if (selectedCategory === 'DEBATE') matchesCategory = ev.slug === 'dataduals'
     if (selectedCategory === 'CAD') matchesCategory = ev.slug === 'datamodelling'
-    if (selectedCategory === 'ESPORTS') matchesCategory = ev.slug === 'dataarena'
 
     return matchesSearch && matchesCategory
   })
@@ -54,13 +52,13 @@ export default function Events({ onOpenRegister }) {
             Competitions & Tracks
           </h1>
           <p className="text-slate-400 text-xs sm:text-sm mt-1">
-            4 events scheduled across Day 1 (21 Aug) and Day 2 (22 Aug 2026).
+            3 flagship events scheduled for 22 August 2026 at TGPCET Nagpur.
           </p>
         </div>
 
         <div className="glass-panel px-3.5 py-1.5 rounded-lg border border-amber-400/20 text-xs font-mono text-amber-300 flex items-center gap-2 self-start sm:self-auto">
-          <Trophy size={14} />
-          <span>Total Prize Pool: ₹50,000+</span>
+          <Award size={14} />
+          <span>Exciting Prizes & Rewards</span>
         </div>
       </motion.div>
 
@@ -110,7 +108,7 @@ export default function Events({ onOpenRegister }) {
           initial="hidden"
           animate="visible"
           exit="hidden"
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6"
         >
           {filteredEvents.map((event, idx) => (
             <EventCard

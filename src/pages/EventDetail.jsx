@@ -5,12 +5,18 @@ import {
   Calendar,
   Clock,
   MapPin,
-  Trophy,
+  Award,
   ExternalLink,
   Phone,
   Mail,
   Copy,
   Check,
+  CheckCircle2,
+  AlertTriangle,
+  Layers,
+  FileCheck,
+  Cpu,
+  Target
 } from 'lucide-react'
 import { EVENTS } from '../data/events'
 
@@ -33,11 +39,13 @@ export default function EventDetail({ onOpenRegister }) {
 
   const tabs = [
     { id: 'overview', label: 'Overview' },
+    { id: 'rules', label: 'Rules & Guidelines' },
+    { id: 'software', label: event.supportedSoftware ? 'Supported Software' : null },
+    { id: 'submission', label: (event.submissionRequirements || event.submissionChecklist) ? 'Submission Specs' : null },
     { id: 'evaluation', label: 'Evaluation' },
-    { id: 'rules', label: 'Rules' },
-    { id: 'prizes', label: 'Prizes' },
+    { id: 'prizes', label: 'Prizes & Rewards' },
     { id: 'contacts', label: 'Coordinators & FAQs' },
-  ]
+  ].filter(t => t.label !== null)
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(event.registration)
@@ -72,8 +80,11 @@ export default function EventDetail({ onOpenRegister }) {
           </div>
 
           <div className="glass-panel px-4 py-2 rounded-xl border border-amber-400/20 text-right self-start sm:self-auto">
-            <span className="text-[10px] font-mono text-slate-400 block">PRIZE POOL</span>
-            <span className="font-display font-bold text-lg text-amber-300">{event.prizePool}</span>
+            <span className="text-[10px] font-mono text-slate-400 block uppercase">Rewards</span>
+            <span className="font-display font-bold text-sm sm:text-base text-amber-300 flex items-center gap-1.5 justify-end">
+              <Award size={14} className="text-amber-400" />
+              <span>{event.prizePool}</span>
+            </span>
           </div>
         </div>
 
@@ -118,20 +129,40 @@ export default function EventDetail({ onOpenRegister }) {
           {activeTab === 'overview' && (
             <div className="space-y-4">
               <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
-                <h3 className="font-display text-base font-bold text-white">Event Description</h3>
+                <h3 className="font-display text-base font-bold text-white">Event Overview</h3>
                 <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                   {event.description}
                 </p>
               </div>
 
+              {event.objectives && (
+                <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Target size={16} className="text-[#00C2FF]" />
+                    <h3 className="font-display text-base font-bold text-white">Core Objectives</h3>
+                  </div>
+                  <ul className="space-y-2 text-xs sm:text-sm text-slate-300">
+                    {event.objectives.map((obj, i) => (
+                      <li key={i} className="flex items-start gap-2.5">
+                        <CheckCircle2 size={14} className="text-[#00FF9D] shrink-0 mt-0.5" />
+                        <span>{obj}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {event.tracks && (
                 <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
-                  <h3 className="font-display text-base font-bold text-white">Focus Tracks</h3>
+                  <div className="flex items-center gap-2">
+                    <Layers size={16} className="text-[#00C2FF]" />
+                    <h3 className="font-display text-base font-bold text-white">Focus Domains & Themes</h3>
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {event.tracks.map((tr, i) => (
-                      <div key={i} className="bg-[#030915] p-3 rounded-lg border border-white/5 space-y-1">
+                      <div key={i} className="bg-[#030915] p-3.5 rounded-lg border border-white/5 space-y-1">
                         <div className="text-xs font-bold text-white">{tr.title}</div>
-                        <p className="text-slate-400 text-xs">{tr.desc}</p>
+                        <p className="text-slate-400 text-xs leading-relaxed">{tr.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -140,18 +171,121 @@ export default function EventDetail({ onOpenRegister }) {
             </div>
           )}
 
-          {/* Tab 2: Evaluation */}
+          {/* Tab 2: Rules & Guidelines */}
+          {activeTab === 'rules' && (
+            <div className="space-y-4">
+              <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
+                <h3 className="font-display text-base font-bold text-white">Rules & Guidelines</h3>
+                <ol className="space-y-2.5 list-decimal ml-4 text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  {event.rules.map((rule, idx) => (
+                    <li key={idx} className="pl-1.5">{rule}</li>
+                  ))}
+                </ol>
+              </div>
+
+              {event.importantNote && (
+                <div className="glass-panel p-4 rounded-xl border border-amber-400/30 bg-amber-950/15 space-y-1.5">
+                  <div className="flex items-center gap-2 text-amber-300 text-xs font-mono font-bold">
+                    <AlertTriangle size={14} />
+                    <span>IMPORTANT PARTICIPANT DIRECTIVE</span>
+                  </div>
+                  <p className="text-xs text-slate-300 leading-relaxed">
+                    {event.importantNote}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Tab: Supported Software (for CAD/3D) */}
+          {activeTab === 'software' && event.supportedSoftware && (
+            <div className="space-y-4">
+              <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
+                <div>
+                  <h3 className="font-display text-base font-bold text-white">Supported Software & Tools</h3>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Participants can use any of the following recommended tools according to their engineering domain:
+                  </p>
+                </div>
+
+                <div className="space-y-3">
+                  {event.supportedSoftware.map((group, idx) => (
+                    <div key={idx} className="bg-[#030915] p-4 rounded-xl border border-white/5 space-y-2">
+                      <div className="text-xs font-bold text-white font-mono">{group.domain}</div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {group.tools.map((tool, tIdx) => (
+                          <span
+                            key={tIdx}
+                            className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-mono text-[#00C2FF]"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="text-xs text-slate-400 italic bg-white/5 p-3 rounded-lg border border-white/5">
+                  Note: The above list is provided as recommended software support. Participants may use another professional 3D modelling/CAD tool if it is suitable for their project and approved by the organizers.
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Tab: Submission Specs */}
+          {activeTab === 'submission' && (
+            <div className="space-y-4">
+              {event.submissionRequirements && (
+                <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <FileCheck size={16} className="text-[#00FF9D]" />
+                    <h3 className="font-display text-base font-bold text-white">Submission Requirements</h3>
+                  </div>
+
+                  <div className="space-y-3">
+                    {event.submissionRequirements.map((req, idx) => (
+                      <div key={idx} className="bg-[#030915] p-3.5 rounded-lg border border-white/5 space-y-1">
+                        <div className="text-xs font-bold text-white font-mono">{req.title}</div>
+                        <p className="text-xs text-slate-300 leading-relaxed">{req.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {event.submissionChecklist && (
+                <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <FileCheck size={16} className="text-[#00C2FF]" />
+                    <h3 className="font-display text-base font-bold text-white">Submission Checklist</h3>
+                  </div>
+
+                  <ul className="space-y-2 text-xs sm:text-sm text-slate-300">
+                    {event.submissionChecklist.map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#030915] border border-white/5">
+                        <CheckCircle2 size={14} className="text-[#00FF9D] shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Tab: Evaluation */}
           {activeTab === 'evaluation' && (
             <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
-              <h3 className="font-display text-base font-bold text-white">Judging Criteria</h3>
+              <h3 className="font-display text-base font-bold text-white">Judging & Evaluation Criteria</h3>
               <div className="space-y-2">
                 {event.evaluationRubric?.map((rubric, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between p-3 rounded-lg bg-[#030915] border border-white/5 text-xs"
+                    className="flex items-center justify-between p-3.5 rounded-lg bg-[#030915] border border-white/5 text-xs sm:text-sm"
                   >
                     <span className="text-slate-200">{rubric.criteria}</span>
-                    <span className="font-mono font-bold text-[#00C2FF] shrink-0 ml-2">
+                    <span className="font-mono font-bold text-[#00C2FF] shrink-0 ml-3">
                       {rubric.weight}
                     </span>
                   </div>
@@ -160,45 +294,44 @@ export default function EventDetail({ onOpenRegister }) {
             </div>
           )}
 
-          {/* Tab 3: Rules */}
-          {activeTab === 'rules' && (
-            <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
-              <h3 className="font-display text-base font-bold text-white">Rules & Guidelines</h3>
-              <ol className="space-y-2 list-decimal ml-4 text-xs text-slate-300 leading-relaxed">
-                {event.rules.map((rule, idx) => (
-                  <li key={idx} className="pl-1">{rule}</li>
-                ))}
-              </ol>
-            </div>
-          )}
-
-          {/* Tab 4: Prizes */}
+          {/* Tab: Prizes */}
           {activeTab === 'prizes' && (
-            <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
-              <h3 className="font-display text-base font-bold text-white">Prizes & Awards</h3>
+            <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
+              <div>
+                <h3 className="font-display text-base font-bold text-white">Exciting Prizes & Rewards</h3>
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Winners and standout performers will be awarded exciting tech gadgets, exclusive reward hampers, vouchers, medals, and certificates of excellence.
+                </p>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {event.prizes?.map((prize, idx) => (
-                  <div key={idx} className="bg-[#030915] p-3.5 rounded-lg border border-amber-400/20 space-y-1">
-                    <div className="text-xs font-mono font-semibold text-amber-300">{prize.position}</div>
-                    <div className="text-xs font-bold text-white">{prize.reward}</div>
+                  <div key={idx} className="bg-[#030915] p-4 rounded-xl border border-amber-400/20 space-y-1.5 flex flex-col justify-between">
+                    <div>
+                      <div className="text-xs font-mono font-bold text-amber-300">{prize.position}</div>
+                      <div className="text-xs font-medium text-slate-200 mt-1 leading-relaxed">{prize.reward}</div>
+                    </div>
+                    <div className="pt-2 text-[10px] font-mono text-slate-500 border-t border-white/5">
+                      Awarded at Valedictory
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Tab 5: Contacts */}
+          {/* Tab: Contacts */}
           {activeTab === 'contacts' && (
             <div className="space-y-4">
               <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
-                <h3 className="font-display text-base font-bold text-white">Coordinators</h3>
+                <h3 className="font-display text-base font-bold text-white">Event Coordinators</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                   {event.coordinators?.map((c, idx) => (
-                    <div key={idx} className="bg-[#030915] p-3 rounded-lg border border-white/5 space-y-1 font-mono">
+                    <div key={idx} className="bg-[#030915] p-3.5 rounded-xl border border-white/5 space-y-1 font-mono">
                       <div className="font-bold text-white">{c.name}</div>
                       <div className="text-slate-400 text-[11px]">{c.role}</div>
                       <div className="pt-1 text-slate-300 text-[11px]">
-                        <a href={`tel:${c.phone}`} className="hover:underline">{c.phone}</a>
+                        <a href={`tel:${c.phone}`} className="hover:underline text-[#00FF9D]">{c.phone}</a>
                       </div>
                     </div>
                   ))}
@@ -207,12 +340,12 @@ export default function EventDetail({ onOpenRegister }) {
 
               {event.faqs && (
                 <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
-                  <h3 className="font-display text-base font-bold text-white">FAQs</h3>
-                  <div className="space-y-2 text-xs">
+                  <h3 className="font-display text-base font-bold text-white">Frequently Asked Questions</h3>
+                  <div className="space-y-2.5 text-xs sm:text-sm">
                     {event.faqs.map((faq, idx) => (
-                      <div key={idx} className="bg-[#030915] p-3 rounded-lg border border-white/5 space-y-1">
+                      <div key={idx} className="bg-[#030915] p-3.5 rounded-lg border border-white/5 space-y-1">
                         <div className="font-bold text-white">Q: {faq.q}</div>
-                        <div className="text-slate-300">A: {faq.a}</div>
+                        <div className="text-slate-300 leading-relaxed text-xs">A: {faq.a}</div>
                       </div>
                     ))}
                   </div>
@@ -226,7 +359,7 @@ export default function EventDetail({ onOpenRegister }) {
         <div className="lg:col-span-4 sticky top-24">
           <div className="glass-panel p-5 rounded-xl border border-white/10 space-y-4">
             <div className="border-b border-white/5 pb-3">
-              <span className="text-[10px] font-mono text-slate-400 block">REGISTRATION FEE</span>
+              <span className="text-[10px] font-mono text-slate-400 block uppercase">REGISTRATION FEE</span>
               <div className="text-xl font-bold text-white mt-0.5">{event.entryFee}</div>
               <span className="text-xs text-slate-400 font-mono">Team: {event.teamSize}</span>
             </div>
@@ -235,6 +368,10 @@ export default function EventDetail({ onOpenRegister }) {
               <div className="flex justify-between py-1 border-b border-white/5">
                 <span className="text-slate-500">Date:</span>
                 <span className="text-white">{event.date}</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-white/5">
+                <span className="text-slate-500">Prizes:</span>
+                <span className="text-amber-300 font-semibold">{event.prizePool}</span>
               </div>
               <div className="flex justify-between py-1 border-b border-white/5">
                 <span className="text-slate-500">Venue:</span>

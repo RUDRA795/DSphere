@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Trophy, Users, Building2, MapPin, ArrowRight, Layers, ExternalLink } from 'lucide-react'
+import { Award, Users, Building2, MapPin, ArrowRight, Layers, ExternalLink } from 'lucide-react'
 import { motion } from 'framer-motion'
 import Hero from '../components/Hero'
 import EventCard from '../components/EventCard'
@@ -9,7 +9,7 @@ import { DEPARTMENT_INFO } from '../data/department'
 
 const STAT_ICONS = {
   Layers: Layers,
-  Trophy: Trophy,
+  Award: Award,
   Users: Users,
   Building2: Building2,
 }
@@ -43,7 +43,7 @@ export default function Home({ onOpenRegister }) {
           className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4"
         >
           {FESTIVAL_STATS.map((stat, i) => {
-            const Icon = STAT_ICONS[stat.icon] || Trophy
+            const Icon = STAT_ICONS[stat.icon] || Award
             return (
               <motion.div
                 key={i}
@@ -55,9 +55,9 @@ export default function Home({ onOpenRegister }) {
                   <div className="text-[11px] font-mono text-slate-400 uppercase">
                     {stat.label}
                   </div>
-                  <div className="font-display font-bold text-2xl text-white mt-1">
+                  <div className="font-display font-bold text-xl sm:text-2xl text-white mt-1">
                     {stat.value}
-                    <span className="text-[#00C2FF] text-lg font-normal">{stat.suffix}</span>
+                    <span className="text-[#00C2FF] text-base sm:text-lg font-normal">{stat.suffix}</span>
                   </div>
                 </div>
                 <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[#00C2FF]">
@@ -77,7 +77,7 @@ export default function Home({ onOpenRegister }) {
               Flagship Events
             </h2>
             <p className="text-slate-400 text-xs sm:text-sm mt-0.5">
-              4 specialized competitions across Machine Learning, Debate, Softwares, and Esports.
+              3 specialized competitions across Machine Learning, Tech Debate, and 3D Modelling.
             </p>
           </div>
 
@@ -95,7 +95,7 @@ export default function Home({ onOpenRegister }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6"
         >
           {EVENTS.map((event, idx) => (
             <EventCard
@@ -121,7 +121,7 @@ export default function Home({ onOpenRegister }) {
             About DSphere 2026
           </h2>
           <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-4xl">
-            DSphere is the annual national technical convergence hosted by the Department of Computer Science & Engineering (Data Science) at Tulsiramji Gaikwad-Patil College of Engineering & Technology (TGPCET), Nagpur. The event provides a competitive platform for undergraduate and diploma students to demonstrate skills in AI/ML, critical debate, 3D engineering modeling, and esports.
+            DSphere is the annual national technical convergence hosted by the Department of Computer Science & Engineering (Data Science) at Tulsiramji Gaikwad-Patil College of Engineering & Technology (TGPCET), Nagpur. The event provides a competitive platform for undergraduate and diploma students to demonstrate skills in AI/ML, critical debate, and 3D engineering modeling.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
@@ -135,7 +135,7 @@ export default function Home({ onOpenRegister }) {
             </div>
             <div className="bg-[#030915] p-3.5 rounded-xl border border-white/5">
               <div className="text-xs font-bold text-white">Dates & Venue</div>
-              <div className="text-xs text-slate-400 mt-1">21 — 22 August 2026 · Wardha Road Campus</div>
+              <div className="text-xs text-slate-400 mt-1">22 August 2026 · Wardha Road Campus</div>
             </div>
           </div>
         </motion.div>
