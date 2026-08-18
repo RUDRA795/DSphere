@@ -112,6 +112,7 @@ export default function App() {
 
       {/* 6. Registration Modal */}
       <RegistrationModal
+        key={preselectedSlug}
         isOpen={isRegisterOpen}
         onClose={handleCloseRegister}
         preselectedSlug={preselectedSlug}

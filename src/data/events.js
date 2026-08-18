@@ -1,8 +1,8 @@
 export const REGISTRATION_LINKS = {
-  dataforge: "https://docs.google.com/forms/d/e/1FAIpQLSe-dataforge-2026/viewform",
-  dataduals: "https://docs.google.com/forms/d/e/1FAIpQLSe-dataduals-2026/viewform",
-  datamodelling: "https://docs.google.com/forms/d/e/1FAIpQLSe-datamodelling-2026/viewform",
-  general: "https://docs.google.com/forms/d/e/1FAIpQLSe-dsphere-all-events-2026/viewform"
+  dataforge: "https://forms.gle/yCawnFhu4iSxzmTy8",
+  dataduals: "https://forms.gle/iDaoSGSKoUDAD77Q9",
+  datamodelling: "https://forms.gle/DMNUiGNK7ns8PNY56",
+  general: "https://forms.gle/yCawnFhu4iSxzmTy8"
 }
 
 export const FESTIVAL_STATS = [
@@ -97,7 +97,7 @@ export const EVENTS = [
     shortDesc: 'A high-octane parliamentary technical debate where sharp minds clash over AI ethics, AGI governance, data sovereignty, and technological philosophy.',
     description: 'DataDuals is the ultimate verbal battleground for tech enthusiasts, policy thinkers, and critical analysts. In an era where AI is rewriting industry norms, DataDuals challenges speakers to argue the affirmative and negative of provocative technological propositions before a panel of esteemed jury members.',
     teamSize: '2 Members (Speaker 1 + Speaker 2)',
-    entryFee: '₹100 / Team',
+    entryFee: 'Free (No Entry Fee)',
     prizePool: 'Exciting Prizes & Rewards',
     prizes: [
       { position: '1st Place (Winning Duo)', reward: 'Gold Medals + Tech Hampers + Reward Vouchers + Certificate of Excellence' },
@@ -149,7 +149,7 @@ export const EVENTS = [
     shortDesc: 'A flagship 3D modelling and CAD engineering competition testing precision modeling, assembly creation, and photorealistic rendering.',
     description: 'DataModelling is open to students from all engineering branches. Participants create an original 3D model based on the given theme or problem statement using industry-standard engineering, architectural, or creative 3D design suites. Participants demonstrate their design rationale, modelling approach, and engineering concepts live before the judges.',
     teamSize: '1 — 2 Members',
-    entryFee: '₹120 / Team',
+    entryFee: '₹100 / Team',
     prizePool: 'Exciting Prizes & Rewards',
     prizes: [
       { position: '1st Place (Design Champion)', reward: 'Gold Medal + Premium Tech Gadgets + Reward Vouchers + Certificate of Excellence' },

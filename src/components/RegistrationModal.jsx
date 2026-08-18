@@ -1,10 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { X, ExternalLink, Copy, Check } from 'lucide-react'
 import { EVENTS } from '../data/events'
 
 export default function RegistrationModal({ isOpen, onClose, preselectedSlug = 'dataforge' }) {
   const [selectedSlug, setSelectedSlug] = useState(preselectedSlug)
   const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    if (preselectedSlug) {
+      setSelectedSlug(preselectedSlug)
+    }
+    setCopied(false)
+  }, [preselectedSlug, isOpen])
 
   if (!isOpen) return null
 
@@ -14,6 +21,11 @@ export default function RegistrationModal({ isOpen, onClose, preselectedSlug = '
     navigator.clipboard.writeText(currentEvent.registration)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  const handleTrackChange = (slug) => {
+    setSelectedSlug(slug)
+    setCopied(false)
   }
 
   return (
@@ -51,7 +63,7 @@ export default function RegistrationModal({ isOpen, onClose, preselectedSlug = '
               return (
                 <button
                   key={ev.slug}
-                  onClick={() => setSelectedSlug(ev.slug)}
+                  onClick={() => handleTrackChange(ev.slug)}
                   className={`p-2 rounded-xl text-left border text-xs transition-all ${
                     isSelected
                       ? 'border-[#00C2FF] bg-[#00C2FF]/10 text-[#00C2FF] font-bold'
