@@ -74,7 +74,7 @@ export default function Schedule() {
           </div>
           <div>
             <div className="text-xs font-mono font-bold text-[#00C2FF]">ONE-DAY MEGA CONVERGENCE</div>
-            <div className="font-display font-bold text-sm sm:text-base text-white">22 August 2026 · 08:30 AM to 06:30 PM</div>
+            <div className="font-display font-bold text-sm sm:text-base text-white">22 August 2026 · 09:30 AM to 04:00 PM</div>
           </div>
         </div>
 
