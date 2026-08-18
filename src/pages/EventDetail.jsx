@@ -43,8 +43,6 @@ export default function EventDetail({ onOpenRegister }) {
     { id: 'software', label: event.supportedSoftware ? 'Supported Software' : null },
     { id: 'submission', label: (event.submissionRequirements || event.submissionChecklist) ? 'Submission Specs' : null },
     { id: 'evaluation', label: 'Evaluation' },
-    { id: 'prizes', label: 'Prizes & Rewards' },
-    { id: 'contacts', label: 'Coordinators & FAQs' },
   ].filter(t => t.label !== null)
 
   const handleCopyLink = () => {
@@ -291,66 +289,6 @@ export default function EventDetail({ onOpenRegister }) {
                   </div>
                 ))}
               </div>
-            </div>
-          )}
-
-          {/* Tab: Prizes */}
-          {activeTab === 'prizes' && (
-            <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-4">
-              <div>
-                <h3 className="font-display text-base font-bold text-white">Exciting Prizes & Rewards</h3>
-                <p className="text-xs text-slate-400 mt-0.5">
-                  Winners and standout performers will be awarded exciting tech gadgets, exclusive reward hampers, vouchers, medals, and certificates of excellence.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {event.prizes?.map((prize, idx) => (
-                  <div key={idx} className="bg-[#030915] p-4 rounded-xl border border-amber-400/20 space-y-1.5 flex flex-col justify-between">
-                    <div>
-                      <div className="text-xs font-mono font-bold text-amber-300">{prize.position}</div>
-                      <div className="text-xs font-medium text-slate-200 mt-1 leading-relaxed">{prize.reward}</div>
-                    </div>
-                    <div className="pt-2 text-[10px] font-mono text-slate-500 border-t border-white/5">
-                      Awarded at Valedictory
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Tab: Contacts */}
-          {activeTab === 'contacts' && (
-            <div className="space-y-4">
-              <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
-                <h3 className="font-display text-base font-bold text-white">Event Coordinators</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                  {event.coordinators?.map((c, idx) => (
-                    <div key={idx} className="bg-[#030915] p-3.5 rounded-xl border border-white/5 space-y-1 font-mono">
-                      <div className="font-bold text-white">{c.name}</div>
-                      <div className="text-slate-400 text-[11px]">{c.role}</div>
-                      <div className="pt-1 text-slate-300 text-[11px]">
-                        <a href={`tel:${c.phone}`} className="hover:underline text-[#00FF9D]">{c.phone}</a>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {event.faqs && (
-                <div className="glass-panel p-5 sm:p-6 rounded-xl border border-white/10 space-y-3">
-                  <h3 className="font-display text-base font-bold text-white">Frequently Asked Questions</h3>
-                  <div className="space-y-2.5 text-xs sm:text-sm">
-                    {event.faqs.map((faq, idx) => (
-                      <div key={idx} className="bg-[#030915] p-3.5 rounded-lg border border-white/5 space-y-1">
-                        <div className="font-bold text-white">Q: {faq.q}</div>
-                        <div className="text-slate-300 leading-relaxed text-xs">A: {faq.a}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           )}
         </div>
