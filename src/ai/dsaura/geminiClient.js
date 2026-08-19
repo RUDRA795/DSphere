@@ -102,8 +102,7 @@ export async function queryDSAURA({ message, history = [], currentRoute = '/', a
         }
       })
     }
-    userParts.push({ text: `[Current Page Context: ${currentRoute}]
-User Query: ${message || 'Voice Query'}` })
+    userParts.push({ text: `[Current Page Context: ${currentRoute}]\nUser Query: ${message || 'Voice Query'}` })
 
     contents.push({
       role: 'user',
