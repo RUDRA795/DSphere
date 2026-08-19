@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DSphere 2026 - Project Analysis & Technical Report</title>
+<style>
+  @page {
+    size: A4;
+    margin: 1.5cm 1.3cm 1.5cm 1.3cm;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1e293b;
+    background: #ffffff;
+    font-size: 11px;
+    line-height: 1.5;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .avoid-break {
+    page-break-inside: avoid;
+  }
+
+  /* Header Cover Banner */
+  .header-card {
+    background: linear-gradient(135deg, #040914 0%, #0b1736 60%, #071124 100%);
+    color: #ffffff;
+    padding: 22px 26px;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    margin-bottom: 16px;
+  }
+
+  .header-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    background: rgba(0, 194, 255, 0.15);
+    border: 1px solid rgba(0, 194, 255, 0.4);
+    color: #00c2ff;
+    font-size: 9px;
+    font-weight: 700;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .header-title {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    margin-bottom: 3px;
+  }
+
+  .header-title span {
+    color: #00c2ff;
+  }
+
+  .header-subtitle {
+    font-size: 11.5px;
+    color: #94a3b8;
+    max-width: 650px;
+    line-height: 1.4;
+  }
+
+  .header-meta {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5px;
+    color: #cbd5e1;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Section Styling */
+  .section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    border-left: 4px solid #0090b8;
+    padding-left: 8px;
+    margin: 14px 0 8px 0;
+    letter-spacing: -0.2px;
+  }
+
+  .section-subtitle {
+    font-size: 10px;
+    color: #64748b;
+    margin-top: -4px;
+    margin-bottom: 10px;
+  }
+
+  /* Cards Grid */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  .grid-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  .card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+
+  .stat-card {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 8px 10px;
+    text-align: center;
+  }
+
+  .stat-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    color: #0090b8;
+  }
+
+  .stat-lbl {
+    font-size: 8.5px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* Event Details Card */
+  .event-box {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-top: 3px solid #0090b8;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+
+  .event-box.dataduals {
+    border-top-color: #7c3aed;
+  }
+
+  .event-box.datamodelling {
+    border-top-color: #059669;
+  }
+
+  .event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+  }
+
+  .event-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .event-tagline {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: #0090b8;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 8.5px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .pill-cyan { background: #e0f2fe; color: #0369a1; }
+  .pill-violet { background: #f3e8ff; color: #6b21a8; }
+  .pill-emerald { background: #d1fae5; color: #047857; }
+  .pill-amber { background: #fef3c7; color: #b45309; }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 6px 8px;
+    margin: 6px 0;
+    font-size: 9px;
+  }
+
+  .meta-item strong {
+    display: block;
+    font-size: 8px;
+    color: #64748b;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6px 0;
+    font-size: 9.5px;
+  }
+
+  th, td {
+    padding: 5px 8px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  /* Lists */
+  ul, ol {
+    padding-left: 14px;
+    margin: 3px 0;
+  }
+
+  li {
+    margin-bottom: 2px;
+  }
+
+  /* Timeline */
+  .timeline-item {
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .timeline-time {
+    width: 80px;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #0090b8;
+  }
+
+  .timeline-content {
+    flex-grow: 1;
+  }
+
+  .timeline-title {
+    font-weight: 700;
+    font-size: 10.5px;
+    color: #0f172a;
+  }
+
+  .timeline-desc {
+    font-size: 9px;
+    color: #64748b;
+  }
+
+  .footer-note {
+    margin-top: 14px;
+    padding-top: 8px;
+    border-top: 1px solid #cbd5e1;
+    display: flex;
+    justify-content: space-between;
+    font-size: 8px;
+    color: #64748b;
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER & EXECUTIVE SUMMARY -->
+<div class="header-card">
+  <div class="header-badge">OFFICIAL TECHNICAL CONVERGENCE REPORT</div>
+  <div class="header-title">DSPHERE <span>2026</span></div>
+  <div class="header-subtitle">
+    National Technical Convergence organized by the Department of Computer Science & Engineering (Data Science) at Tulsiramji Gaikwad-Patil College of Engineering & Technology (TGPCET), Nagpur.
+  </div>
+  <div class="header-meta">
+    <div>DATE: Saturday, 22 August 2026</div>
+    <div>VENUE: TGPCET Campus, Wardha Road, Nagpur</div>
+    <div>STATUS: Production Verified & Active</div>
+  </div>
+</div>
+
+<div class="section-title">1. Key Metrics & Festival Highlights</div>
+<div class="grid-4" style="margin-bottom: 12px;">
+  <div class="stat-card">
+    <div class="stat-val">03</div>
+    <div class="stat-lbl">Flagship Events</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val">Exciting</div>
+    <div class="stat-lbl">Prizes & Rewards</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val">500+</div>
+    <div class="stat-lbl">Expected Delegates</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val">40+</div>
+    <div class="stat-lbl">Colleges Represented</div>
+  </div>
+</div>
+
+<div class="section-title">2. Architecture & Technical Stack</div>
+<div class="card avoid-break" style="margin-bottom: 12px;">
+  <table style="margin:0;">
+    <thead>
+      <tr>
+        <th style="width: 25%;">Layer / Domain</th>
+        <th style="width: 35%;">Technology / Framework</th>
+        <th>Purpose & Implementation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Core Application</strong></td>
+        <td>React 18, Vite 5, React Router DOM 6</td>
+        <td>High-performance Single Page Application with client-side routing</td>
+      </tr>
+      <tr>
+        <td><strong>3D Visual Engine</strong></td>
+        <td>Three.js, @react-three/fiber, @react-three/drei</td>
+        <td>Interactive satellite Earth with orbital rockets & animated Nagpur zoom</td>
+      </tr>
+      <tr>
+        <td><strong>Particle Canvas</strong></td>
+        <td>HTML5 Canvas API, Custom Particle Physics</td>
+        <td>Cursor-reactive dynamic neural particle network</td>
+      </tr>
+      <tr>
+        <td><strong>Styling & Motion</strong></td>
+        <td>Tailwind CSS 3, Framer Motion 10</td>
+        <td>Cyber dark theme, glassmorphic panels, and animated page transitions</td>
+      </tr>
+      <tr>
+        <td><strong>Icons & Typography</strong></td>
+        <td>Lucide React, Outfit, Plus Jakarta Sans, JetBrains</td>
+        <td>Responsive iconography and layered font hierarchy</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section-title">3. Department & Institutional Profile</div>
+<div class="grid-2 avoid-break" style="margin-bottom: 10px;">
+  <div class="card">
+    <strong style="color: #0090b8; font-size: 10.5px; display: block; margin-bottom: 2px;">HOST INSTITUTION</strong>
+    <div style="font-size: 11.5px; font-weight: 700; color: #0f172a;">Tulsiramji Gaikwad-Patil College of Engineering & Technology</div>
+    <div style="font-size: 9px; color: #64748b; margin-top: 1px;">Autonomous Institution affiliated to RTMNU Nagpur | NAAC 'A+' Grade | AICTE Approved</div>
+    <p style="font-size: 9.5px; color: #334155; margin-top: 4px; line-height: 1.35;">
+      Mohgaon, Wardha Road, Nagpur, Maharashtra — 441108 (Ahead of Dongargaon Toll Plaza)
+    </p>
+  </div>
+  <div class="card">
+    <strong style="color: #0090b8; font-size: 10.5px; display: block; margin-bottom: 2px;">DEPARTMENT VISION</strong>
+    <p style="font-size: 9.5px; color: #334155; line-height: 1.4;">
+      To emerge as a Centre of Excellence in Data Science, nurturing expertise in Analytics and Machine Learning for national development.
+    </p>
+    <div style="margin-top: 4px; font-size: 9px; font-weight: 600; color: #0f172a;">
+      HOD: Prof. Sayra Bano Sheikh <span style="color:#64748b; font-weight:normal;">(hod.ds@tgpcet.com)</span>
+    </div>
+  </div>
+</div>
+
+<div class="footer-note">
+  <div>DSPHERE 2026 — TGPCET NAGPUR</div>
+  <div>PAGE 1 OF 3</div>
+</div>
+
+<!-- PAGE 2: FLAGSHIP COMPETITIONS CATALOG -->
+<div class="page-break"></div>
+
+<div class="section-title" style="margin-top: 0;">4. Flagship Competitions Detailed Specifications</div>
+<p class="section-subtitle">Comprehensive breakdown of rules, eligibility, fees, team structures, and evaluation rubrics.</p>
+
+<!-- EVENT 1: DATAFORGE -->
+<div class="event-box avoid-break">
+  <div class="event-header">
+    <div>
+      <div class="event-title">1. DataForge — ML / AI Hackathon</div>
+      <div class="event-tagline">Forge Ideas. Train Models. Solve Problems.</div>
+    </div>
+    <span class="pill pill-cyan">MACHINE LEARNING</span>
+  </div>
+  <p style="font-size: 9.5px; color: #334155; margin-bottom: 4px;">
+    Premier machine learning challenge where participants build predictive models and end-to-end data pipelines for real-world industry problems.
+  </p>
+  <div class="meta-grid">
+    <div class="meta-item"><strong>Date & Time</strong>22 Aug 2026 · 10:30 AM</div>
+    <div class="meta-item"><strong>Venue</strong>AI & Data Science Lab</div>
+    <div class="meta-item"><strong>Team Size</strong>1 — 3 Members</div>
+    <div class="meta-item"><strong>Entry Fee</strong>₹150 / Team</div>
+  </div>
+  <div style="font-size: 9px; margin-top: 4px;">
+    <strong>Focus Tracks:</strong> Predictive Health & Bio-Informatics, Computer Vision & Detection, NLP & LLM Applications, Fintech & Fraud Detection.<br>
+    <strong>Evaluation Rubric:</strong> Model Accuracy & F1 (35%), Data Cleaning & EDA (25%), Architecture & Optimization (20%), Live Demo & Pitch (20%).
+  </div>
+</div>
+
+<!-- EVENT 2: DATADUALS -->
+<div class="event-box dataduals avoid-break">
+  <div class="event-header">
+    <div>
+      <div class="event-title">2. DataDuals — Technology Debate Championship</div>
+      <div class="event-tagline">Two Sides. One Topic. Unlimited Arguments.</div>
+    </div>
+    <span class="pill pill-violet">TECH DEBATE</span>
+  </div>
+  <p style="font-size: 9.5px; color: #334155; margin-bottom: 4px;">
+    High-octane parliamentary technical debate where sharp minds clash over AI ethics, AGI governance, data sovereignty, and technological philosophy.
+  </p>
+  <div class="meta-grid">
+    <div class="meta-item"><strong>Date & Time</strong>22 Aug 2026 · 01:00 PM</div>
+    <div class="meta-item"><strong>Venue</strong>Seminar Hall 1, TGPCET</div>
+    <div class="meta-item"><strong>Team Size</strong>2 Members (Spk 1 + 2)</div>
+    <div class="meta-item"><strong>Entry Fee</strong>Free (No Entry Fee)</div>
+  </div>
+  <div style="font-size: 9px; margin-top: 4px;">
+    <strong>Focus Tracks:</strong> AGI & Existential AI Risk, Data Privacy vs. State Security, Generative AI & IP, Autonomous Weapons & Warfare.<br>
+    <strong>Evaluation Rubric:</strong> Technical Substance (35%), Rebuttal Sharpness (30%), Rhetorical Eloquence (20%), Parliamentary Decorum (15%).
+  </div>
+</div>
+
+<!-- EVENT 3: DATAMODELLING -->
+<div class="event-box datamodelling avoid-break">
+  <div class="event-header">
+    <div>
+      <div class="event-title">3. DataModelling — 3D CAD & Digital Twin Challenge</div>
+      <div class="event-tagline">Imagine It. Model It. Build It.</div>
+    </div>
+    <span class="pill pill-emerald">3D MODELLING</span>
+  </div>
+  <p style="font-size: 9.5px; color: #334155; margin-bottom: 4px;">
+    Flagship 3D modelling and CAD engineering competition testing precision modeling, assembly creation, and photorealistic rendering.
+  </p>
+  <div class="meta-grid">
+    <div class="meta-item"><strong>Date & Time</strong>22 Aug 2026 · 12:00 PM</div>
+    <div class="meta-item"><strong>Venue</strong>CAD Centre, Mech Block</div>
+    <div class="meta-item"><strong>Team Size</strong>1 — 2 Members</div>
+    <div class="meta-item"><strong>Entry Fee</strong>₹100 / Team</div>
+  </div>
+  <div style="font-size: 9px; margin-top: 4px;">
+    <strong>Supported Software:</strong> Fusion 360, SolidWorks, CATIA, AutoCAD, Revit, Blender, Creo, Siemens NX, Tinkercad.<br>
+    <strong>Evaluation Rubric:</strong> Dimensional Accuracy (35%), Creativity & Application (25%), Render & Material Quality (20%), Live Demo (20%).
+  </div>
+</div>
+
+<div class="footer-note">
+  <div>DSPHERE 2026 — TGPCET NAGPUR</div>
+  <div>PAGE 2 OF 3</div>
+</div>
+
+<!-- PAGE 3: SCHEDULE, RULES & COMMITTEE -->
+<div class="page-break"></div>
+
+<div class="section-title" style="margin-top: 0;">5. Synchronized Event Day Schedule (22 August 2026)</div>
+<div class="card avoid-break" style="margin-bottom: 12px;">
+  <div class="timeline-item">
+    <div class="timeline-time">09:30 AM</div>
+    <div class="timeline-content">
+      <div class="timeline-title">Participant Reporting & Kit Distribution</div>
+      <div class="timeline-desc">Arrival, identity verification, desk onboarding, and event credentials check-in.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">10:00 AM</div>
+    <div class="timeline-content">
+      <div class="timeline-title">Grand Inauguration Ceremony & Final Briefing</div>
+      <div class="timeline-desc">Main Auditorium — Dignitary addresses, jury welcome, and track rule briefing.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">10:30 AM</div>
+    <div class="timeline-content">
+      <div class="timeline-title">DataForge — AI/ML Hackathon Sprint Begins</div>
+      <div class="timeline-desc">Advanced AI & Data Science Lab — Problem statement release and model development sprint.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">11:00 AM</div>
+    <div class="timeline-content">
+      <div class="timeline-title">Keynote Guest Lecture</div>
+      <div class="timeline-desc">Main Auditorium — Special industry expert session on Emerging AI Frontiers.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">12:00 PM</div>
+    <div class="timeline-content">
+      <div class="timeline-title">DataModelling Competition Commences</div>
+      <div class="timeline-desc">Digital Design & CAD Centre — 3D CAD modeling, assembly design, and render sprint.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">01:00 PM</div>
+    <div class="timeline-content">
+      <div class="timeline-title">DataDuals Debate Rounds Kickoff</div>
+      <div class="timeline-desc">Seminar Hall 1 — Parliamentary tech debate clash with crossfire and rebuttal rounds.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">03:00 PM</div>
+    <div class="timeline-content">
+      <div class="timeline-title">Comprehensive Judging & Final Presentations</div>
+      <div class="timeline-desc">Live inference testing, jury project assessment, and debate scoring across all venues.</div>
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-time">04:00 PM</div>
+    <div class="timeline-content">
+      <div class="timeline-title">Valedictory Ceremony & Prize Distribution</div>
+      <div class="timeline-desc">Main Auditorium — Trophy felicitation, certificates, medal awards, and closing ceremony.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">6. Organizing Committee & Student Leadership</div>
+<div class="grid-2 avoid-break" style="margin-bottom: 10px;">
+  <div class="card">
+    <strong style="color: #0090b8; font-size: 10px; display: block; margin-bottom: 4px;">FACULTY ADVISORY LEADS</strong>
+    <ul style="font-size: 9px; list-style: none; padding-left: 0;">
+      <li style="margin-bottom: 3px;"><strong>Prof. Abhimanyu Dutonde</strong> — Convener & HOD (ML & Big Data)</li>
+      <li style="margin-bottom: 3px;"><strong>Prof. Pooja Pimpalshende</strong> — Faculty Co-Convener (DataForge)</li>
+      <li style="margin-bottom: 3px;"><strong>Prof. Premlata Shahare</strong> — Faculty In-Charge (DataDuals)</li>
+      <li style="margin-bottom: 3px;"><strong>Prof. Jayesh Bisane</strong> — Faculty In-Charge (DataModelling)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <strong style="color: #0090b8; font-size: 10px; display: block; margin-bottom: 4px;">STUDENT CORE COMMITTEE</strong>
+    <table style="font-size: 8.5px; margin: 0;">
+      <tbody>
+        <tr><td><strong>Aditya Korde</strong> (President)</td><td>+91 84469 05836</td></tr>
+        <tr><td><strong>Vedant Nanoti</strong> (Secretary)</td><td>+91 99601 16568</td></tr>
+        <tr><td><strong>Ram Dhote</strong> (Treasurer)</td><td>+91 82082 68304</td></tr>
+        <tr><td><strong>Shreyash Nannaware</strong> (Tech Head)</td><td>+91 87673 04109</td></tr>
+        <tr><td><strong>Om Komujwar</strong> (Joint Sec)</td><td>+91 93702 07152</td></tr>
+        <tr><td><strong>Rohit Chute</strong> (Event Head)</td><td>+91 78756 47302</td></tr>
+        <tr><td><strong>Om Bokade</strong> (Media Head)</td><td>+91 91583 99325</td></tr>
+        <tr><td><strong>Sourabh Wanjari</strong> (Discipline Head)</td><td>+91 90219 23172</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="section-title">7. General Rules & Disqualification Code</div>
+<div class="card avoid-break" style="font-size: 9px; color: #334155; line-height: 1.4;">
+  <ul style="margin: 0; padding-left: 12px;">
+    <li><strong>Eligibility:</strong> Open to bona fide undergraduate, postgraduate, and diploma engineering students. College ID mandatory.</li>
+    <li><strong>Punctuality:</strong> Reporting required 45 mins prior to track start. Late entries beyond 15 mins forfeit slot.</li>
+    <li><strong>Integrity & Code:</strong> Plagiarism, unapproved code duplication, or lab tampering causes immediate disqualification.</li>
+    <li><strong>Decisions:</strong> Designated jury evaluation scores and faculty coordinator rulings are final and binding.</li>
+  </ul>
+</div>
+
+<div class="footer-note">
+  <div>DSPHERE 2026 — TGPCET NAGPUR · OFFICIAL REPORT</div>
+  <div>PAGE 3 OF 3</div>
+</div>
+
+</body>
+</html>

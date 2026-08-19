@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
+import { Sparkles, Navigation } from 'lucide-react'
 
 // Convert equirectangular texture UV (0..1) to precise 3D Sphere coordinates
-// Matches Three.js SphereGeometry internal vertex generation
 function textureUVToVector3(u, v_from_top, radius = 2.1) {
   const theta = u * Math.PI * 2
   const phi = v_from_top * Math.PI
@@ -15,12 +15,12 @@ function textureUVToVector3(u, v_from_top, radius = 2.1) {
 }
 
 // Exact pixel-calibrated coordinates for Nagpur, Maharashtra on earth_satellite_map.jpg
-// u = 0.723 (72.3% from left), v_from_top = 0.385 (38.5% from North Pole)
 const NAGPUR_U = 0.705
 const NAGPUR_V = 0.400
 
 export default function SplashGlobe({ onEnterPortal }) {
   const mountRef = useRef(null)
+  const [hudPhase, setHudPhase] = useState('ACQUIRING ORBIT')
 
   useEffect(() => {
     const container = mountRef.current
@@ -328,19 +328,23 @@ export default function SplashGlobe({ onEnterPortal }) {
       ringMesh.scale.set(pulseScale, pulseScale, pulseScale)
       ringMat.opacity = Math.max(0, 1 - (pulseScale - 1) / 1.5)
 
-      if (elapsedSeconds < 3.0) {
-        // First 3 seconds: Satellite Earth rotates smoothly, bringing Nagpur into forward view
+      if (elapsedSeconds < 2.8) {
+        // First ~3 seconds: Satellite Earth rotates smoothly, bringing Nagpur into forward view
         globeGroup.rotation.y += 0.007
         camera.lookAt(0, 0, 0)
+        if (elapsedSeconds > 1.4 && hudPhase !== 'LOCKING TGPCET NAGPUR') {
+          setHudPhase('LOCKING TGPCET NAGPUR')
+        }
       } else {
         // PRECISE VIRAL ZOOM DIRECTLY INTO THE GREEN DOT (TGPCET NAGPUR)
         if (!zoomInitialized) {
           startCamPos.copy(camera.position)
           zoomInitialized = true
+          setHudPhase('ENTERING DSPHERE CONVERGENCE')
         }
 
-        const zoomElapsed = elapsedSeconds - 3.0
-        const zoomDuration = 1.05
+        const zoomElapsed = elapsedSeconds - 2.8
+        const zoomDuration = 1.15
         const zoomT = Math.min(1, zoomElapsed / zoomDuration)
         // Cubic ease-in-out curve for dramatic hyper-zoom feel
         const easeZoom = zoomT < 0.5
@@ -400,6 +404,39 @@ export default function SplashGlobe({ onEnterPortal }) {
     <div className="fixed inset-0 z-50 bg-[#020612] flex items-center justify-center overflow-hidden select-none">
       {/* 3D Photorealistic Satellite View of Earth + Roaming Rockets */}
       <div ref={mountRef} className="absolute inset-0 w-full h-full" />
+
+      {/* Futuristic Telemetry HUD Overlay */}
+      <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-6 sm:p-10 z-10">
+        {/* Top Header Telemetry */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#00FF9D] animate-ping" />
+            <div className="font-mono text-xs text-slate-300 tracking-wider">
+              <span className="text-[#00C2FF] font-bold">DSPHERE</span> 2026 // ORBITAL INTERFACE
+            </div>
+          </div>
+          <div className="font-mono text-[11px] text-slate-400 hidden sm:block">
+            LAT: <span className="text-white">21.0345° N</span> | LON: <span className="text-white">79.0270° E</span>
+          </div>
+        </div>
+
+        {/* Center / Bottom Target Lock Status */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="glass-panel-1 px-4 py-2 rounded-xl border border-white/10 flex items-center gap-2.5">
+            <Navigation size={14} className="text-[#00FF9D] animate-spin" style={{ animationDuration: '6s' }} />
+            <span className="font-mono text-xs text-slate-200 uppercase tracking-widest">{hudPhase}</span>
+          </div>
+
+          <button
+            onClick={onEnterPortal}
+            className="pointer-events-auto btn-cyber-outline px-4 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white flex items-center gap-1.5 cursor-pointer shadow-lg"
+          >
+            <span>Skip Intro</span>
+            <Sparkles size={12} className="text-[#00C2FF]" />
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
+
