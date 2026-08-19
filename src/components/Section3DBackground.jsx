@@ -41,19 +41,19 @@ export default function Section3DBackground() {
     mountEl.appendChild(renderer.domElement)
 
     // 2. Dual-Theme Lighting System
-    const ambientLight = new THREE.AmbientLight(isDark ? 0x0B1736 : 0xFFFFFF, isDark ? 1.0 : 2.8)
+    const ambientLight = new THREE.AmbientLight(isDark ? 0x0B1736 : 0xF1F5F9, isDark ? 1.0 : 1.5)
     scene.add(ambientLight)
 
-    const keyLight = new THREE.DirectionalLight(isDark ? 0x00C2FF : 0x0284C7, isDark ? 1.8 : 1.2)
+    const keyLight = new THREE.DirectionalLight(isDark ? 0x00C2FF : 0x0284C7, isDark ? 1.8 : 2.4)
     keyLight.position.set(20, 25, 20)
     scene.add(keyLight)
 
-    const fillLight = new THREE.DirectionalLight(isDark ? 0x8B5CF6 : 0x6366F1, isDark ? 1.4 : 0.8)
+    const fillLight = new THREE.DirectionalLight(isDark ? 0x8B5CF6 : 0xF43F5E, isDark ? 1.4 : 1.8)
     fillLight.position.set(-20, -15, -15)
     scene.add(fillLight)
 
-    const pointLight = new THREE.PointLight(isDark ? 0x00FF9D : 0x0284C7, isDark ? 1.5 : 0.8, 40)
-    pointLight.position.set(0, 0, 10)
+    const pointLight = new THREE.PointLight(isDark ? 0x00FF9D : 0x10B981, isDark ? 1.5 : 2.0, 45)
+    pointLight.position.set(0, 0, 12)
     scene.add(pointLight)
 
     // Master container for all section environments
@@ -75,9 +75,10 @@ export default function Section3DBackground() {
 
     // Colors according to theme
     const cyanColor = isDark ? 0x00C2FF : 0x0284C7
-    const violetColor = isDark ? 0x8B5CF6 : 0x6366F1
+    const violetColor = isDark ? 0x8B5CF6 : 0x7C3AED
     const emeraldColor = isDark ? 0x00FF9D : 0x059669
-    const coreSolidColor = isDark ? 0x071124 : 0xFFFFFF
+    const coralColor = isDark ? 0xFB7185 : 0xF43F5E
+    const coreSolidColor = isDark ? 0x071124 : 0xE0F2FE
 
     // ══════════════════════════════════════════════════════════════════════
     // 1. HOME: INTERACTIVE DATA CORE
@@ -88,14 +89,13 @@ export default function Section3DBackground() {
     const innerCoreGeo = new THREE.IcosahedronGeometry(3.6, 1)
     const innerCoreMat = new THREE.MeshStandardMaterial({
       color: coreSolidColor,
-      metalness: isDark ? 0.7 : 0.1,
-      roughness: isDark ? 0.2 : 0.1,
+      metalness: isDark ? 0.7 : 0.4,
+      roughness: isDark ? 0.2 : 0.12,
       transparent: true,
-      opacity: isDark ? 0.45 : 0.20,
+      opacity: isDark ? 0.45 : 0.65,
     })
     const innerCore = new THREE.Mesh(innerCoreGeo, innerCoreMat)
     homeGroup.add(innerCore)
-
 
     // Outer wireframe cage
     const outerCageGeo = new THREE.IcosahedronGeometry(5.2, isMobile ? 1 : 2)
@@ -103,28 +103,28 @@ export default function Section3DBackground() {
       color: cyanColor,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.35 : 0.25,
+      opacity: isDark ? 0.35 : 0.65,
     })
     const outerCage = new THREE.Mesh(outerCageGeo, outerCageMat)
     homeGroup.add(outerCage)
 
     // Gimbal Ring 1
-    const gimbalGeo1 = new THREE.TorusGeometry(7.2, 0.04, 16, 64)
+    const gimbalGeo1 = new THREE.TorusGeometry(7.2, isDark ? 0.04 : 0.06, 16, 64)
     const gimbalMat1 = new THREE.MeshBasicMaterial({
       color: violetColor,
       transparent: true,
-      opacity: isDark ? 0.45 : 0.3,
+      opacity: isDark ? 0.45 : 0.70,
     })
     const gimbal1 = new THREE.Mesh(gimbalGeo1, gimbalMat1)
     gimbal1.rotation.x = Math.PI / 3
     homeGroup.add(gimbal1)
 
     // Gimbal Ring 2
-    const gimbalGeo2 = new THREE.TorusGeometry(8.6, 0.03, 16, 64)
+    const gimbalGeo2 = new THREE.TorusGeometry(8.6, isDark ? 0.03 : 0.05, 16, 64)
     const gimbalMat2 = new THREE.MeshBasicMaterial({
-      color: emeraldColor,
+      color: isDark ? emeraldColor : coralColor,
       transparent: true,
-      opacity: isDark ? 0.4 : 0.25,
+      opacity: isDark ? 0.4 : 0.65,
     })
     const gimbal2 = new THREE.Mesh(gimbalGeo2, gimbalMat2)
     gimbal2.rotation.y = Math.PI / 3.5
@@ -145,9 +145,9 @@ export default function Section3DBackground() {
     dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3))
     const dustMat = new THREE.PointsMaterial({
       color: cyanColor,
-      size: isMobile ? 0.15 : 0.2,
+      size: isMobile ? 0.18 : 0.25,
       transparent: true,
-      opacity: isDark ? 0.7 : 0.5,
+      opacity: isDark ? 0.7 : 0.85,
     })
     const dustPoints = new THREE.Points(dustGeo, dustMat)
     homeGroup.add(dustPoints)
@@ -158,11 +158,11 @@ export default function Section3DBackground() {
     const forgeGroup = environments.dataforge
     const nodeCount = isMobile ? 20 : 36
     const nodePositions = []
-    const forgeNodeGeo = new THREE.SphereGeometry(0.22, 12, 12)
+    const forgeNodeGeo = new THREE.SphereGeometry(0.24, 12, 12)
     const forgeNodeMat = new THREE.MeshStandardMaterial({
       color: cyanColor,
       emissive: cyanColor,
-      emissiveIntensity: isDark ? 0.6 : 0.2,
+      emissiveIntensity: isDark ? 0.6 : 0.5,
       metalness: 0.5,
       roughness: 0.2,
     })
@@ -181,7 +181,7 @@ export default function Section3DBackground() {
     const lineMat = new THREE.LineBasicMaterial({
       color: cyanColor,
       transparent: true,
-      opacity: isDark ? 0.22 : 0.15,
+      opacity: isDark ? 0.22 : 0.45,
     })
     const pathways = []
     for (let i = 0; i < nodeCount; i++) {
@@ -198,11 +198,11 @@ export default function Section3DBackground() {
     // Moving Data Packets
     const packetCount = isMobile ? 6 : 14
     const packets = []
-    const packetGeo = new THREE.SphereGeometry(0.12, 8, 8)
+    const packetGeo = new THREE.SphereGeometry(0.16, 8, 8)
     const packetMat = new THREE.MeshBasicMaterial({
-      color: emeraldColor,
+      color: isDark ? emeraldColor : coralColor,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.95,
     })
     for (let i = 0; i < packetCount && pathways.length > 0; i++) {
       const pMesh = new THREE.Mesh(packetGeo, packetMat)
@@ -219,16 +219,16 @@ export default function Section3DBackground() {
     // 3. DATADUALS: OPPOSING TWIN ENERGY STRUCTURES
     // ══════════════════════════════════════════════════════════════════════
     const dualsGroup = environments.dataduals
-    const dualRingGeo = new THREE.TorusGeometry(4.8, 0.08, 16, 64)
+    const dualRingGeo = new THREE.TorusGeometry(4.8, isDark ? 0.08 : 0.12, 16, 64)
     const leftRingMat = new THREE.MeshBasicMaterial({
       color: violetColor,
       transparent: true,
-      opacity: isDark ? 0.5 : 0.35,
+      opacity: isDark ? 0.5 : 0.75,
     })
     const rightRingMat = new THREE.MeshBasicMaterial({
       color: cyanColor,
       transparent: true,
-      opacity: isDark ? 0.5 : 0.35,
+      opacity: isDark ? 0.5 : 0.75,
     })
     const leftRing = new THREE.Mesh(dualRingGeo, leftRingMat)
     leftRing.position.x = -4.5
@@ -246,7 +246,7 @@ export default function Section3DBackground() {
       color: violetColor,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.3 : 0.2,
+      opacity: isDark ? 0.3 : 0.55,
     })
     const leftPlasma = new THREE.Mesh(plasmaGeo, leftPlasmaMat)
     leftRing.add(leftPlasma)
@@ -255,7 +255,7 @@ export default function Section3DBackground() {
       color: cyanColor,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.3 : 0.2,
+      opacity: isDark ? 0.3 : 0.55,
     })
     const rightPlasma = new THREE.Mesh(plasmaGeo, rightPlasmaMat)
     rightRing.add(rightPlasma)
@@ -269,7 +269,7 @@ export default function Section3DBackground() {
       color: emeraldColor,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.35 : 0.25,
+      opacity: isDark ? 0.35 : 0.70,
     })
     const cadCube = new THREE.Mesh(cadCubeGeo, cadCubeMat)
     cadGroup.add(cadCube)
@@ -281,13 +281,13 @@ export default function Section3DBackground() {
       metalness: 0.6,
       roughness: 0.2,
       transparent: true,
-      opacity: isDark ? 0.35 : 0.25,
+      opacity: isDark ? 0.35 : 0.60,
     })
     const innerCad = new THREE.Mesh(innerCadGeo, innerCadMat)
     cadGroup.add(innerCad)
 
     // Measurement orbit ring
-    const cadRingGeo = new THREE.TorusGeometry(6.2, 0.03, 16, 72)
+    const cadRingGeo = new THREE.TorusGeometry(6.2, isDark ? 0.03 : 0.05, 16, 72)
     const cadRing = new THREE.Mesh(cadRingGeo, cadCubeMat)
     cadRing.rotation.x = Math.PI / 2
     cadGroup.add(cadRing)
@@ -296,11 +296,11 @@ export default function Section3DBackground() {
     // 5. GALLERY: FLOATING TECHNICAL SATELLITE NODES
     // ══════════════════════════════════════════════════════════════════════
     const galleryGroup = environments.gallery
-    const galleryRingGeo = new THREE.TorusGeometry(8.5, 0.05, 16, 72)
+    const galleryRingGeo = new THREE.TorusGeometry(8.5, isDark ? 0.05 : 0.08, 16, 72)
     const galleryRingMat = new THREE.MeshBasicMaterial({
       color: cyanColor,
       transparent: true,
-      opacity: isDark ? 0.3 : 0.2,
+      opacity: isDark ? 0.3 : 0.65,
     })
     const galleryRing = new THREE.Mesh(galleryRingGeo, galleryRingMat)
     galleryRing.rotation.x = Math.PI / 3.5
@@ -310,11 +310,11 @@ export default function Section3DBackground() {
     // 6. SCHEDULE: ORBITAL TIMELINE RING SYSTEM & MILESTONES
     // ══════════════════════════════════════════════════════════════════════
     const schedGroup = environments.schedule
-    const schedRingGeo = new THREE.TorusGeometry(9.0, 0.06, 16, 80)
+    const schedRingGeo = new THREE.TorusGeometry(9.0, isDark ? 0.06 : 0.09, 16, 80)
     const schedRingMat = new THREE.MeshBasicMaterial({
       color: cyanColor,
       transparent: true,
-      opacity: isDark ? 0.35 : 0.25,
+      opacity: isDark ? 0.35 : 0.70,
     })
     const schedRing = new THREE.Mesh(schedRingGeo, schedRingMat)
     schedRing.rotation.x = Math.PI / 4
@@ -327,11 +327,11 @@ export default function Section3DBackground() {
       const bx = Math.cos(angle) * 9.0
       const by = Math.sin(angle) * 9.0 * Math.cos(Math.PI / 4)
       const bz = -Math.sin(angle) * 9.0 * Math.sin(Math.PI / 4)
-      const bGeo = new THREE.SphereGeometry(0.25, 12, 12)
+      const bGeo = new THREE.SphereGeometry(0.28, 12, 12)
       const bMat = new THREE.MeshStandardMaterial({
-        color: emeraldColor,
-        emissive: emeraldColor,
-        emissiveIntensity: isDark ? 0.8 : 0.4,
+        color: i % 2 === 0 ? emeraldColor : coralColor,
+        emissive: i % 2 === 0 ? emeraldColor : coralColor,
+        emissiveIntensity: isDark ? 0.8 : 0.6,
       })
       const bMesh = new THREE.Mesh(bGeo, bMat)
       bMesh.position.set(bx, by, bz)
@@ -348,7 +348,7 @@ export default function Section3DBackground() {
       color: cyanColor,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.32 : 0.22,
+      opacity: isDark ? 0.32 : 0.65,
     })
     const octMesh = new THREE.Mesh(octGeo, octMat)
     rulesGroup.add(octMesh)
@@ -359,7 +359,7 @@ export default function Section3DBackground() {
       metalness: 0.8,
       roughness: 0.1,
       transparent: true,
-      opacity: isDark ? 0.4 : 0.3,
+      opacity: isDark ? 0.4 : 0.65,
     })
     const innerOct = new THREE.Mesh(innerOctGeo, innerOctMat)
     rulesGroup.add(innerOct)
@@ -373,7 +373,7 @@ export default function Section3DBackground() {
       color: violetColor,
       wireframe: true,
       transparent: true,
-      opacity: isDark ? 0.32 : 0.22,
+      opacity: isDark ? 0.32 : 0.65,
     })
     const latticeMesh = new THREE.Mesh(latticeGeo, latticeMat)
     aboutGroup.add(latticeMesh)
@@ -384,7 +384,7 @@ export default function Section3DBackground() {
       metalness: 0.7,
       roughness: 0.2,
       transparent: true,
-      opacity: isDark ? 0.4 : 0.3,
+      opacity: isDark ? 0.4 : 0.65,
     })
     const innerDodec = new THREE.Mesh(innerDodecGeo, innerDodecMat)
     aboutGroup.add(innerDodec)
@@ -517,9 +517,10 @@ export default function Section3DBackground() {
     <div
       ref={mountRef}
       className="fixed inset-0 pointer-events-none z-0 overflow-hidden transition-opacity duration-700"
-      style={{ opacity: isDark ? 0.88 : 0.45 }}
+      style={{ opacity: isDark ? 0.88 : 0.82 }}
       aria-hidden="true"
     />
   )
 }
+
 

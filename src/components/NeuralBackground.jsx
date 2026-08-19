@@ -65,8 +65,9 @@ export default function NeuralBackground() {
 
     window.addEventListener('resize', handleResize, { passive: true })
 
-    const particleColor = isDark ? '0, 194, 255' : '2, 132, 199'
-    const highlightColor = isDark ? '0, 255, 157' : '124, 58, 237'
+    // Color palette per particle for multi-chromatic data network in light mode
+    const lightColors = ['2, 132, 199', '244, 63, 94', '16, 185, 129', '124, 58, 237', '245, 158, 11']
+    const darkParticleColor = '0, 194, 255'
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height)
@@ -85,7 +86,7 @@ export default function NeuralBackground() {
         if (p.x < 0 || p.x > width) p.vx *= -1
         if (p.y < 0 || p.y > height) p.vy *= -1
 
-        // Mouse interaction (gentle attraction / repulsion)
+        // Mouse interaction
         if (mouse.active) {
           const dx = mouse.x - p.x
           const dy = mouse.y - p.y
@@ -97,10 +98,12 @@ export default function NeuralBackground() {
           }
         }
 
+        const pColor = isDark ? darkParticleColor : lightColors[i % lightColors.length]
+
         // Draw particle
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${particleColor}, ${p.alpha * (isDark ? 0.65 : 0.45)})`
+        ctx.arc(p.x, p.y, p.radius * (isDark ? 1 : 1.3), 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(${pColor}, ${p.alpha * (isDark ? 0.65 : 0.85)})`
         ctx.fill()
       }
 
@@ -113,14 +116,15 @@ export default function NeuralBackground() {
           const dy = p1.y - p2.y
           const dist = Math.sqrt(dx * dx + dy * dy)
 
-          const maxDist = isMobile ? 90 : 125
+          const maxDist = isMobile ? 90 : 130
           if (dist < maxDist) {
-            const lineAlpha = (1 - dist / maxDist) * (isDark ? 0.14 : 0.08)
+            const lineAlpha = (1 - dist / maxDist) * (isDark ? 0.14 : 0.22)
+            const lineColor = isDark ? darkParticleColor : '2, 132, 199'
             ctx.beginPath()
             ctx.moveTo(p1.x, p1.y)
             ctx.lineTo(p2.x, p2.y)
-            ctx.strokeStyle = `rgba(${particleColor}, ${lineAlpha})`
-            ctx.lineWidth = 0.65
+            ctx.strokeStyle = `rgba(${lineColor}, ${lineAlpha})`
+            ctx.lineWidth = isDark ? 0.65 : 0.85
             ctx.stroke()
           }
         }
@@ -132,12 +136,13 @@ export default function NeuralBackground() {
           const dy = mouse.y - p.y
           const dist = Math.sqrt(dx * dx + dy * dy)
           if (dist < mouse.radius) {
-            const lineAlpha = (1 - dist / mouse.radius) * (isDark ? 0.25 : 0.14)
+            const lineAlpha = (1 - dist / mouse.radius) * (isDark ? 0.25 : 0.35)
+            const highlightColor = isDark ? '0, 255, 157' : '124, 58, 237'
             ctx.beginPath()
             ctx.moveTo(p.x, p.y)
             ctx.lineTo(mouse.x, mouse.y)
             ctx.strokeStyle = `rgba(${highlightColor}, ${lineAlpha})`
-            ctx.lineWidth = 0.75
+            ctx.lineWidth = 0.85
             ctx.stroke()
           }
         }
@@ -159,11 +164,12 @@ export default function NeuralBackground() {
   return (
     <div
       className="fixed inset-0 pointer-events-none z-0 overflow-hidden transition-opacity duration-700"
-      style={{ opacity: isDark ? 0.45 : 0.28 }}
+      style={{ opacity: isDark ? 0.45 : 0.55 }}
     >
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
     </div>
   )
 }
+
 
 

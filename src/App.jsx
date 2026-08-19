@@ -91,21 +91,22 @@ function AppContent() {
         )}
       </AnimatePresence>
 
-      {/* Layer 01: Ambient Light Fields (Atmospheric Depth) */}
-      <div
-        className={`fixed top-[-10%] left-[-10%] w-[55vw] h-[55vw] rounded-full blur-[140px] pointer-events-none z-0 transition-all duration-1000 ${
-          isDark
-            ? 'bg-gradient-to-br from-[#00C2FF]/15 to-transparent'
-            : 'bg-gradient-to-br from-[#38BDF8]/20 to-transparent'
-        }`}
-      />
-      <div
-        className={`fixed bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full blur-[140px] pointer-events-none z-0 transition-all duration-1000 ${
-          isDark
-            ? 'bg-gradient-to-tl from-[#8B5CF6]/15 to-transparent'
-            : 'bg-gradient-to-tl from-[#818CF8]/18 to-transparent'
-        }`}
-      />
+      {/* Layer 01: Ambient Light Fields (Atmospheric Multi-Color Depth) */}
+      {isDark ? (
+        <>
+          <div className="fixed top-[-10%] left-[-10%] w-[55vw] h-[55vw] rounded-full blur-[140px] pointer-events-none z-0 bg-gradient-to-br from-[#00C2FF]/15 to-transparent transition-all duration-1000" />
+          <div className="fixed bottom-[-10%] right-[-10%] w-[55vw] h-[55vw] rounded-full blur-[140px] pointer-events-none z-0 bg-gradient-to-tl from-[#8B5CF6]/15 to-transparent transition-all duration-1000" />
+        </>
+      ) : (
+        <>
+          {/* Light Mode Multi-Chromatic Aurora Mesh: Blue, Red/Coral, Amber/Yellow, Emerald/Green, Violet */}
+          <div className="fixed top-[-12%] left-[-10%] w-[58vw] h-[58vw] rounded-full blur-[140px] pointer-events-none z-0 bg-gradient-to-br from-[#0284C7]/28 via-[#38BDF8]/20 to-transparent transition-all duration-1000 animate-pulse" style={{ animationDuration: '8s' }} />
+          <div className="fixed top-[4%] right-[-12%] w-[52vw] h-[52vw] rounded-full blur-[140px] pointer-events-none z-0 bg-gradient-to-bl from-[#F43F5E]/22 via-[#FB7185]/16 to-transparent transition-all duration-1000 animate-pulse" style={{ animationDuration: '10s' }} />
+          <div className="fixed top-[35%] left-[20%] w-[48vw] h-[48vw] rounded-full blur-[150px] pointer-events-none z-0 bg-gradient-to-tr from-[#F59E0B]/20 via-[#FBBF24]/14 to-transparent transition-all duration-1000" />
+          <div className="fixed bottom-[12%] left-[-10%] w-[52vw] h-[52vw] rounded-full blur-[140px] pointer-events-none z-0 bg-gradient-to-tr from-[#10B981]/24 via-[#34D399]/18 to-transparent transition-all duration-1000 animate-pulse" style={{ animationDuration: '9s' }} />
+          <div className="fixed bottom-[-10%] right-[-10%] w-[56vw] h-[56vw] rounded-full blur-[140px] pointer-events-none z-0 bg-gradient-to-tl from-[#8B5CF6]/22 via-[#6366F1]/18 to-transparent transition-all duration-1000" />
+        </>
+      )}
 
       {/* Layer 02: Cyber Technical Grid */}
       <div className="fixed inset-0 cyber-grid-bg pointer-events-none z-0" />

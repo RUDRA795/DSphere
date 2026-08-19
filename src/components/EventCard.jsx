@@ -60,13 +60,18 @@ export default function EventCard({ event, onOpenRegister, index = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{ y: -4, transition: { duration: 0.25 } }}
+      whileHover={{ y: -5, transition: { duration: 0.25 } }}
       className={`rounded-2xl p-6 sm:p-7 relative overflow-hidden flex flex-col justify-between border transition-all duration-300 ${
         isDark
           ? 'glass-panel-2 border-white/10'
-          : 'bg-white border-[#E2E8F0] shadow-[0_4px_20px_-2px_rgba(15,23,42,0.06)]'
+          : 'bg-white/95 backdrop-blur-xl border-[#CBD5E1] shadow-[0_12px_35px_-5px_rgba(15,23,42,0.09),0_1px_3px_rgba(0,0,0,0.05)]'
       } ${accents.glow} ${accents.border}`}
     >
+      {/* Light Mode Top Iridescent Chromatic Accent Strip */}
+      {!isDark && (
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#0284C7] via-[#F43F5E] via-[#F59E0B] to-[#10B981]" />
+      )}
+
       {/* Cursor-Following Radial Highlight */}
       {isHovered && (
         <div
@@ -78,7 +83,7 @@ export default function EventCard({ event, onOpenRegister, index = 0 }) {
             top: `${mousePos.y - 120}px`,
             background: isDark
               ? 'radial-gradient(circle, rgba(0, 194, 255, 0.4) 0%, transparent 70%)'
-              : 'radial-gradient(circle, rgba(2, 132, 199, 0.3) 0%, transparent 70%)',
+              : 'radial-gradient(circle, rgba(2, 132, 199, 0.35) 0%, transparent 70%)',
           }}
         />
       )}
@@ -87,7 +92,7 @@ export default function EventCard({ event, onOpenRegister, index = 0 }) {
       <div>
         <div className="flex items-center justify-between gap-2 mb-4">
           <div className="flex items-center gap-2">
-            <span className={`font-mono text-xs font-bold tracking-wider ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>
+            <span className={`font-mono text-xs font-bold tracking-wider ${isDark ? 'text-slate-500' : 'text-[#0284C7]'}`}>
               TRACK {trackNumber}
             </span>
             <span className={isDark ? 'text-slate-700' : 'text-slate-300'}>·</span>
@@ -99,7 +104,7 @@ export default function EventCard({ event, onOpenRegister, index = 0 }) {
           <div className={`px-2.5 py-0.5 rounded-lg text-xs font-mono font-semibold border flex items-center gap-1 ${
             isDark
               ? 'bg-amber-400/10 text-amber-300 border-amber-400/20'
-              : 'bg-[#FFFBEB] text-[#92400E] border-[#FDE68A]'
+              : 'bg-[#FFFBEB] text-[#92400E] border-[#FDE68A] shadow-sm'
           }`}>
             <Award size={12} className={isDark ? 'text-amber-400' : 'text-[#D97706]'} />
             <span className="truncate max-w-[120px]">{event.prizePool}</span>
@@ -118,7 +123,7 @@ export default function EventCard({ event, onOpenRegister, index = 0 }) {
 
         {/* Short Description */}
         <p className={`text-xs sm:text-sm mt-3.5 leading-relaxed font-normal line-clamp-3 ${
-          isDark ? 'text-slate-300' : 'text-slate-600'
+          isDark ? 'text-slate-300' : 'text-[#334155]'
         }`}>
           {event.shortDesc}
         </p>
@@ -127,15 +132,15 @@ export default function EventCard({ event, onOpenRegister, index = 0 }) {
         <div className={`grid grid-cols-2 gap-2.5 mt-5 pt-3.5 border-t text-xs font-mono p-2.5 rounded-xl ${
           isDark
             ? 'border-white/5 text-slate-300 bg-[#030915]/50'
-            : 'border-[#E2E8F0] text-slate-600 bg-[#F8FAFC]'
+            : 'border-[#CBD5E1] text-[#1E293B] bg-[#F1F5F9]/90 shadow-sm'
         }`}>
           <div className="flex items-center gap-1.5">
             <Calendar size={13} className={`shrink-0 ${isDark ? 'text-[#00C2FF]' : 'text-[#0284C7]'}`} />
-            <span className="truncate">{event.date}</span>
+            <span className="truncate font-semibold">{event.date}</span>
           </div>
           <div className="flex items-center gap-1.5 justify-end">
             <Users size={13} className={`shrink-0 ${isDark ? 'text-[#00FF9D]' : 'text-[#059669]'}`} />
-            <span className="truncate">Team: {event.teamSize}</span>
+            <span className="truncate font-semibold">Team: {event.teamSize}</span>
           </div>
         </div>
       </div>
@@ -149,7 +154,7 @@ export default function EventCard({ event, onOpenRegister, index = 0 }) {
           className={`flex-1 py-2.5 px-3.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer group ${
             isDark
               ? 'border-white/15 bg-white/5 hover:bg-white/10 hover:border-white/30 text-slate-200'
-              : 'border-[#CBD5E1] bg-white hover:bg-[#F1F5F9] text-slate-800 shadow-sm'
+              : 'border-[#CBD5E1] bg-white hover:bg-[#F8FAFC] text-[#0F172A] shadow-sm hover:border-[#0284C7]'
           }`}
         >
           <span>View Details</span>
@@ -169,5 +174,6 @@ export default function EventCard({ event, onOpenRegister, index = 0 }) {
     </motion.div>
   )
 }
+
 
 

@@ -112,20 +112,20 @@ body {
     color: #64748B !important;
   }
 
-  /* All glass panels in light mode become pure crisp white cards */
+  /* All glass panels in light mode become ultra-premium frosted acrylic cards */
   .glass-panel,
   .glass-panel-1,
   .glass-panel-2,
   .glass-panel-3,
   .glass-panel-hero {
-    background: #FFFFFF !important;
-    border-color: #E2E8F0 !important;
-    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 0 0 1px #E2E8F0 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    border-color: rgba(203, 213, 225, 0.85) !important;
+    box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(16px) saturate(160%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
   }
 
-  /* Hardcoded dark backgrounds convert to clean light gray / white */
+  /* Sub-panels and metric containers */
   div[class*="bg-[#030915]"],
   div[class*="bg-[#040914]"],
   div[class*="bg-[#08152e]"],
@@ -133,10 +133,10 @@ body {
   div[class*="bg-[#071124]"],
   div[class*="bg-[#030814]"],
   div[class*="bg-[#071328]"] {
-    background-color: #F8FAFC !important;
-    border-color: #E2E8F0 !important;
+    background-color: rgba(241, 245, 249, 0.92) !important;
+    border-color: rgba(203, 213, 225, 0.85) !important;
     color: #1E293B !important;
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
   }
 
   /* Border overrides */
@@ -145,18 +145,18 @@ body {
   [class*="border-white/15"],
   [class*="border-white/20"],
   [class*="border-white/30"] {
-    border-color: #E2E8F0 !important;
+    border-color: rgba(203, 213, 225, 0.85) !important;
   }
 
   [class*="bg-white/5"],
   [class*="bg-white/10"],
   [class*="bg-white/15"] {
-    background-color: #F1F5F9 !important;
+    background-color: rgba(241, 245, 249, 0.90) !important;
   }
 
   /* Outline buttons */
   .btn-cyber-outline {
-    background-color: #FFFFFF !important;
+    background-color: rgba(255, 255, 255, 0.90) !important;
     border: 1px solid #CBD5E1 !important;
     color: #0F172A !important;
     box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
@@ -170,14 +170,16 @@ body {
 
   /* Navigation */
   nav {
-    background-color: rgba(255, 255, 255, 0.90) !important;
-    border-bottom: 1px solid #E2E8F0 !important;
-    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04) !important;
+    background-color: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05) !important;
   }
 
   /* Footer */
   footer {
-    background-color: #F1F5F9 !important;
+    background-color: rgba(241, 245, 249, 0.95) !important;
     border-top: 1px solid #E2E8F0 !important;
   }
 

@@ -46,24 +46,29 @@ export default function CountdownTimer() {
   ]
 
   return (
-    <div className={`rounded-2xl p-5 border relative overflow-hidden transition-colors ${
+    <div className={`rounded-2xl p-5 border relative overflow-hidden transition-all ${
       isDark
         ? 'glass-panel-2 border-white/10 shadow-[0_10px_30px_-5px_rgba(0,0,0,0.5)]'
-        : 'bg-white border-[#E2E8F0] shadow-[0_4px_20px_-2px_rgba(15,23,42,0.06)]'
+        : 'bg-white/95 backdrop-blur-xl border-[#CBD5E1] shadow-[0_12px_35px_-5px_rgba(15,23,42,0.08),0_1px_3px_rgba(0,0,0,0.05)]'
     }`}>
+      {/* Light Mode Iridescent Top Accent */}
+      {!isDark && (
+        <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-[#0284C7] via-[#F43F5E] via-[#F59E0B] to-[#10B981]" />
+      )}
+
       <div className="flex items-center justify-between gap-2 mb-3">
         <div className="flex items-center gap-2">
           <div className={`w-2 h-2 rounded-full animate-ping ${isDark ? 'bg-[#00C2FF]' : 'bg-[#0284C7]'}`} />
-          <span className={`text-[11px] font-mono font-semibold tracking-wider uppercase ${
-            isDark ? 'text-slate-300' : 'text-slate-600'
+          <span className={`text-[11px] font-mono font-bold tracking-wider uppercase ${
+            isDark ? 'text-slate-300' : 'text-[#0284C7]'
           }`}>
             EVENT COMMENCES IN
           </span>
         </div>
-        <div className={`flex items-center gap-1.5 text-[10px] font-mono px-2 py-0.5 rounded border ${
+        <div className={`flex items-center gap-1.5 text-[10px] font-mono px-2 py-0.5 rounded border font-semibold ${
           isDark
             ? 'text-[#00FF9D] bg-[#00FF9D]/10 border-[#00FF9D]/20'
-            : 'text-[#059669] bg-[#ECFDF5] border-[#A7F3D0]'
+            : 'text-[#059669] bg-[#ECFDF5] border-[#A7F3D0] shadow-sm'
         }`}>
           <Clock size={11} />
           <span>22 AUG 2026</span>
@@ -77,7 +82,7 @@ export default function CountdownTimer() {
             className={`rounded-xl p-3 sm:p-3.5 relative group border transition-all ${
               isDark
                 ? 'bg-[#030915]/80 border-white/10 hover:border-[#00C2FF]/40 shadow-inner'
-                : 'bg-[#F8FAFC] border-[#E2E8F0] hover:border-[#0284C7]/40 shadow-sm'
+                : 'bg-[#F1F5F9]/90 border-[#CBD5E1] hover:border-[#0284C7] shadow-sm'
             }`}
           >
             <div className={`font-mono text-2xl sm:text-3xl font-black tracking-tight leading-none transition-colors ${
@@ -87,7 +92,7 @@ export default function CountdownTimer() {
             }`}>
               {block.value}
             </div>
-            <div className={`text-[9.5px] font-mono font-semibold mt-1.5 uppercase tracking-wider ${
+            <div className={`text-[9.5px] font-mono font-bold mt-1.5 uppercase tracking-wider ${
               isDark ? 'text-slate-400' : 'text-slate-500'
             }`}>
               {block.label}
@@ -98,5 +103,6 @@ export default function CountdownTimer() {
     </div>
   )
 }
+
 
 
