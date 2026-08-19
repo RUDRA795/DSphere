@@ -5,20 +5,15 @@ import {
   Calendar,
   Clock,
   MapPin,
-  Award,
   ExternalLink,
-  Phone,
-  Mail,
   Copy,
   Check,
   CheckCircle2,
   AlertTriangle,
   Layers,
   FileCheck,
-  Cpu,
   Target,
-  Sparkles,
-  HelpCircle
+  Sparkles
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { EVENTS } from '../data/events'
@@ -84,14 +79,6 @@ export default function EventDetail({ onOpenRegister }) {
             <p className="text-sm sm:text-base font-mono text-[#00C2FF] font-semibold">
               {event.tagline}
             </p>
-          </div>
-
-          <div className="glass-panel-1 px-5 py-3 rounded-2xl border border-amber-400/30 bg-amber-950/15 text-right self-start sm:self-auto shadow-md">
-            <span className="text-[10px] font-mono text-slate-400 block uppercase font-semibold">REWARD PACKAGE</span>
-            <span className="font-display font-black text-base sm:text-lg text-amber-300 flex items-center gap-1.5 justify-end mt-0.5">
-              <Award size={16} className="text-amber-400" />
-              <span>{event.prizePool}</span>
-            </span>
           </div>
         </div>
 
@@ -193,42 +180,6 @@ export default function EventDetail({ onOpenRegister }) {
                           <div key={i} className="bg-[#030915]/80 p-4 rounded-xl border border-white/5 space-y-1.5 hover:border-[#00C2FF]/30 transition-colors">
                             <div className="text-xs font-bold text-white font-mono">{tr.title}</div>
                             <p className="text-slate-400 text-xs leading-relaxed">{tr.desc}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Prizes breakdown */}
-                  {event.prizes && (
-                    <div className="glass-panel-2 p-6 sm:p-7 rounded-2xl border border-white/10 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <Award size={17} className="text-amber-400" />
-                        <h3 className="font-display text-lg font-bold text-white">Prizes & Recognitions</h3>
-                      </div>
-                      <div className="space-y-2.5">
-                        {event.prizes.map((prz, i) => (
-                          <div key={i} className="p-3.5 rounded-xl bg-[#030915]/80 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-                            <span className="font-bold text-amber-300 font-mono">{prz.position}</span>
-                            <span className="text-slate-300 text-right sm:max-w-md">{prz.reward}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* FAQs */}
-                  {event.faqs && (
-                    <div className="glass-panel-2 p-6 sm:p-7 rounded-2xl border border-white/10 space-y-4">
-                      <div className="flex items-center gap-2">
-                        <HelpCircle size={17} className="text-[#00C2FF]" />
-                        <h3 className="font-display text-lg font-bold text-white">Frequently Asked Questions</h3>
-                      </div>
-                      <div className="space-y-3">
-                        {event.faqs.map((faq, i) => (
-                          <div key={i} className="p-4 rounded-xl bg-[#030915]/80 border border-white/5 space-y-1">
-                            <div className="text-xs font-bold text-white font-mono">Q: {faq.q}</div>
-                            <p className="text-xs text-slate-400 leading-relaxed">A: {faq.a}</p>
                           </div>
                         ))}
                       </div>
@@ -393,10 +344,6 @@ export default function EventDetail({ onOpenRegister }) {
                 <span className="text-white font-semibold">{event.date}</span>
               </div>
               <div className="flex justify-between py-1.5 border-b border-white/5">
-                <span className="text-slate-500">Rewards:</span>
-                <span className="text-amber-300 font-semibold">{event.prizePool}</span>
-              </div>
-              <div className="flex justify-between py-1.5 border-b border-white/5">
                 <span className="text-slate-500">Venue:</span>
                 <span className="text-white truncate max-w-[160px]">{event.venue.split(',')[0]}</span>
               </div>
@@ -430,23 +377,11 @@ export default function EventDetail({ onOpenRegister }) {
                 )}
               </button>
             </div>
-
-            {/* Coordinator Contacts Chip */}
-            {event.coordinators && event.coordinators.length > 0 && (
-              <div className="pt-4 border-t border-white/10 space-y-2 text-[11px] font-mono">
-                <span className="text-slate-500 uppercase tracking-wider block font-semibold">Track Coordinators:</span>
-                {event.coordinators.slice(0, 2).map((c, i) => (
-                  <div key={i} className="flex justify-between text-slate-300">
-                    <span>{c.name}</span>
-                    <a href={`tel:${c.phone}`} className="text-[#00C2FF] hover:underline">{c.phone}</a>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         </div>
       </div>
     </div>
   )
 }
+
 
