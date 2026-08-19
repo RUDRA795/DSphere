@@ -68,9 +68,15 @@ export async function queryDSAURA({ message, history = [], currentRoute = '/', a
     console.warn('[DSAURA] Server endpoint failed, trying direct Gemini API...', err)
   }
 
-  // 2. Direct Browser-side Gemini API (trying gemini-3.6-flash, then gemini-3.5-flash, then gemini-2.5-flash)
+  // 2. Direct Browser-side Gemini API
   if (apiKey) {
-    const candidateModels = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-2.5-flash']
+    const candidateModels = [
+      'gemini-3.5-flash',
+      'gemini-3.5-flash-lite',
+      'gemini-3.7-flash',
+      'gemini-flash-latest',
+      'gemini-3.6-flash',
+    ]
     const systemInstruction = getSystemInstruction()
     const contents = []
 

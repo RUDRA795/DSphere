@@ -13,9 +13,6 @@ export default function DSAURAHeader({
   const isDark = theme === 'dark'
 
   const getStatusLabel = () => {
-    if (isOffline) {
-      return { text: 'OFFLINE MODE (Local Knowledge)', dot: 'bg-amber-400' }
-    }
     switch (state) {
       case 'LISTENING':
         return { text: 'LISTENING...', dot: 'bg-[#00FF9D] animate-ping' }

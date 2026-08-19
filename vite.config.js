@@ -68,8 +68,14 @@ Rules:
                   parts: userParts,
                 })
 
-                // Try gemini-3.6-flash, then gemini-3.5-flash, then gemini-2.5-flash
-                const candidateModels = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-2.5-flash']
+                // Verified high-performance Gemini models
+                const candidateModels = [
+                  'gemini-3.5-flash',
+                  'gemini-3.5-flash-lite',
+                  'gemini-3.7-flash',
+                  'gemini-flash-latest',
+                  'gemini-3.6-flash',
+                ]
                 let replyText = ''
                 let lastError = null
 
